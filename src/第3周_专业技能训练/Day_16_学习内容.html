@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 16 | 镜架调整与整形技术</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Microsoft YaHei',Arial,sans-serif;background:#f5f7fa;color:#333;}
+  .header{background:linear-gradient(135deg,#fff3e0,#ffe0b2);padding:40px 30px;border-bottom:3px solid #FF9800;}
+  .day-tag{background:#FF9800;color:white;display:inline-block;padding:4px 16px;border-radius:20px;font-size:0.85em;margin-bottom:12px;}
+  .header h1{font-size:2em;color:#e65100;margin-bottom:8px;}
+  .container{max-width:900px;margin:30px auto;padding:0 20px;}  .section{background:white;border-radius:12px;padding:28px;margin-bottom:24px;box-shadow:0 2px 10px rgba(0,0,0,0.07);}
+  .section h2{font-size:1.3em;color:#e65100;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid #fff3e0;}
+  .section h3{font-size:1.05em;color:#333;margin:18px 0 10px;}
+  .section p{line-height:1.8;color:#555;margin-bottom:12px;font-size:0.95em;}
+  .section ul,.section ol{padding-left:20px;margin-bottom:14px;}
+  .section li{line-height:1.8;color:#555;font-size:0.95em;margin-bottom:4px;}
+  .problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0;}
+  .problem-card{background:#f5f5f5;border-radius:10px;padding:16px;}
+  .problem-card h4{color:#e65100;margin-bottom:8px;}
+  .problem-card .symptom{font-size:0.85em;color:#888;margin-bottom:8px;}
+  .problem-card .fix{font-size:0.88em;color:#333;line-height:1.6;}
+  .tools-box{background:#e3f2fd;border-radius:10px;padding:18px;margin:16px 0;}
+  .tools-box h4{color:#1565c0;margin-bottom:10px;}
+  .tools-box li{font-size:0.9em;line-height:1.7;margin-bottom:4px;}
+  .warning-box{background:#ffebee;border-radius:8px;padding:16px 20px;margin:16px 0;}
+  .warning-box .label{color:#c62828;font-weight:700;margin-bottom:8px;}
+  .step-list{margin:16px 0;}
+  .step-item{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;}
+  .step-num{background:#FF9800;color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.82em;flex-shrink:0;margin-top:2px;}
+  .step-content .title{font-weight:700;color:#333;margin-bottom:4px;font-size:0.95em;}
+  .step-content .desc{font-size:0.88em;color:#555;line-height:1.6;}
+  .summary-box{background:linear-gradient(135deg,#fff3e0,#fff8e1);border-radius:12px;padding:24px;margin-top:30px;}
+  .summary-box h3{color:#e65100;margin-bottom:14px;}
+  .summary-box li{margin-bottom:8px;font-size:0.95em;}
+  .nav-footer{display:flex;justify-content:space-between;margin:30px 0 40px;}
+  .nav-btn{background:#FF9800;color:white;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:0.9em;}
+  .nav-btn.outline{background:white;color:#FF9800;border:2px solid #FF9800;}
+  @media(max-width:600px){.problem-grid{grid-template-columns:1fr;}}
+  .structure-table,.rule-table{width:100%;border-collapse:collapse;margin:14px 0;}
+  .structure-table th,.rule-table th{background:#2196F3;color:white;padding:10px 14px;text-align:center;font-size:0.9em;}
+  .structure-table td,.rule-table td{padding:10px 14px;border-bottom:1px solid #f0f0f0;font-size:0.88em;}
+  .structure-table tr:nth-child(even) td,.rule-table tr:nth-child(even) td{background:#f9f9f9;}
+
+  /* ══════════════════════════════════════════════
+     红米平板响应式适配（横屏1100px / 竖屏900px）
+     ══════════════════════════════════════════════ */
+
+  /* 平板横屏：内容区微调 */
+  @media (max-width: 1100px) {
+    .container { padding: 28px 24px !important; }
+    .days-grid { grid-template-columns: repeat(4,1fr) !important; }
+    .stats-grid { grid-template-columns: repeat(2,1fr) !important; }
+  }
+
+  /* 平板竖屏：核心适配断点 */
+  @media (max-width: 900px) {
+    body { padding: 12px !important; font-size: 15px; }
+    .container { padding: 20px 16px !important; border-radius: 10px !important; }
+    /* 学习内容：各类2列/3列网格折叠为1列 */
+    .value-cards, .material-grid, .face-grid,
+    .norm-grid, .salary-grid, .do-dont, .image-standard,
+    .safety-grid, .role-cards, .review-grid, .equipment-grid,
+    .lens-grid, .coating-grid, .term-grid, .display-rules,
+    .problem-grid, .fabe-grid, .compare-grid, .signal-grid,
+    .review-grid, .zone-grid, .test-info, .method-grid,
+    .question-type, .fab-grid, .form-grid, .wrong-right,
+    .step-grid, .card-grid, .card-row, .grid2, .do-dont,
+    .achieve-grid, .product-card, .sign-area, .wish-cards,
+    .eval-row,
+    [class*="-grid"], [class*="grid-"],
+    .two-col { grid-template-columns: 1fr !important; }
+    /* 3列→2列特殊处理（不完全折叠，保留2列） */
+    .exam-info { grid-template-columns: repeat(2,1fr) !important; }
+    /* 导航按钮：允许换行，防止溢出 */
+    .nav-footer, .nav-bar {
+      flex-wrap: wrap !important;
+      gap: 10px !important;
+    }
+    .nav-btn {
+      font-size: 0.88em !important;
+      padding: 10px 18px !important;
+      text-align: center !important;
+    }
+    /* 标题字号适配 */
+    .header h1, h1 { font-size: 1.4em !important; }
+    .header .subtitle, .header .week-badge { font-size: 13px !important; }
+    /* 表格横向滚动（防溢出） */
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    /* meta-bar 换行 */
+    .meta-bar { padding: 12px 16px !important; gap: 14px !important; flex-wrap: wrap !important; }
+    /* 首页时间轴横向滚动 */
+    .timeline { overflow-x: auto; }
+  }
+
+  /* 手机 / 平板极窄竖屏 */
+  @media (max-width: 600px) {
+    body { padding: 8px !important; }
+    .container { padding: 16px 12px !important; }
+    .header h1, h1 { font-size: 1.2em !important; }
+    .days-grid { grid-template-columns: repeat(2,1fr) !important; }
+    .stats-grid { grid-template-columns: repeat(2,1fr) !important; }
+    .container { padding: 16px !important; }
+  }
+
+/* ═══════ 红米12.1寸平板适配（横屏≈1280px ｜ 竖屏≈800px）═══════ */
+@media (min-width:901px) and (max-width:1400px){
+  .container{max-width:1300px!important;padding:26px 24px!important}
+  body{font-size:16px}
+  .header{padding:34px 28px!important}
+  .header h1{font-size:1.8em!important}
+  img{max-width:100%;height:auto}
+  table{max-width:100%}
+}
+@media (max-width:900px){
+  body{font-size:15px;overflow-x:hidden}
+  .container{max-width:100%!important;padding:18px 14px!important;margin:16px auto!important}
+  .header{padding:24px 16px!important}
+  .header h1{font-size:1.45em!important;line-height:1.35!important}
+  .header .subtitle,.header .day-tag,.header .week-badge{font-size:13px!important}
+  h2{font-size:1.2em!important}
+  h3{font-size:1.08em!important}
+  .meta-bar{padding:12px 14px!important;gap:14px!important;flex-wrap:wrap!important}
+  .nav-footer,.nav-bar{flex-wrap:wrap!important;gap:10px!important}
+  .nav-btn,.nav-footer a,.nav-bar a{font-size:.9em!important;padding:10px 16px!important;text-align:center!important}
+  table{display:block!important;overflow-x:auto!important;width:max-content!important;min-width:100%!important;-webkit-overflow-scrolling:touch}
+  img,svg,video{max-width:100%!important}
+  p,li,td,th{overflow-wrap:break-word}
+  [class*="-row"]:not(.nav-footer):not(.nav-bar),[class*="-cards"],[class*="-list"]{flex-wrap:wrap!important}
+  .problem-grid {
+    grid-template-columns:repeat(2,1fr)!important;gap:12px!important
+  }
+}
+@media (max-width:600px){
+  .container{padding:14px 10px!important}
+  .header h1{font-size:1.25em!important}
+  .problem-grid {
+    grid-template-columns:1fr!important
+  }
+}
+
+  /* ═══════ 每日学习标准模块（目标 / 实践 / FAQ / 参考 / 自测 / 阶段复盘） ═══════ */
+  .lm-block{border-radius:14px;padding:20px 24px;margin:24px 0;line-height:1.85}
+  .lm-block h3{margin:0 0 14px;font-size:1.1em;font-weight:700;letter-spacing:.3px}
+  .lm-list{margin:0;padding-left:22px}
+  .lm-list li{margin-bottom:9px}
+  .lm-goal{background:#e8f5e9;color:#1b5e20}
+  .lm-goal h3{color:#2e7d32}
+  .lm-practice{background:#fff8e1;color:#4e342e}
+  .lm-practice h3{color:#e65100}
+  .lm-faq{background:#f3e5f5;color:#4a148c}
+  .lm-faq h3{color:#7b1fa2}
+  .lm-ref{background:#e3f2fd;color:#0d3c61}
+  .lm-ref h3{color:#1565c0}
+  .lm-quiz{background:#fce4ec;color:#880e4f}
+  .lm-quiz h3{color:#c2185b}
+  .lm-review{background:#ede7f6;color:#311b92}
+  .lm-review h3{color:#4527a0}
+  .lm-meta{margin:12px 0 0;font-size:.9em;opacity:.92}
+  .lm-pr{margin:0 0 14px;padding:14px 16px;background:rgba(255,255,255,.75);border-radius:10px}
+  .lm-pr:last-child{margin-bottom:0}
+  .lm-pr-t{font-weight:700;margin-bottom:6px}
+  .lm-pr-d{margin-bottom:6px}
+  .lm-pr-o{font-size:.92em;font-weight:600}
+  .lm-q{margin:0 0 10px;padding:10px 14px;background:rgba(255,255,255,.75);border-radius:10px}
+  .lm-q:last-child{margin-bottom:0}
+  .lm-q summary{cursor:pointer;font-weight:600;line-height:1.7}
+  .lm-q[open] summary{margin-bottom:8px}
+  .lm-a{font-size:.95em;color:#212121;line-height:1.8}
+  .lm-a b{color:#c2185b}
+  .lm-faq .lm-a b{color:#7b1fa2}
+  .lm-sub{font-weight:700;margin:14px 0 8px;font-size:1em}
+  @media(max-width:900px){
+    .lm-block{padding:16px 14px;margin:18px 0;line-height:1.75}
+    .lm-block h3{font-size:1.02em}
+    .lm-list{padding-left:18px}
+  }
+
+/* ══ HOME-BAR：顶部返回首页入口 ══ */
+.home-topbar{background:#fff;padding:10px 0}
+.home-topbar .ht-inner{max-width:900px;margin:0 auto;padding:0 30px}
+.home-topbar a{display:inline-flex;align-items:center;gap:6px;font-size:.86em;font-weight:700;color:#4a5270;text-decoration:none;background:#f1f3f9;border-radius:20px;padding:7px 18px;transition:background .2s,color .2s,transform .2s}
+.home-topbar a:hover{background:#e6eaf6;color:#283593;transform:translateX(-2px)}
+@media (min-width:901px) and (max-width:1400px){.home-topbar .ht-inner{max-width:1300px}}
+@media (max-width:900px){.home-topbar{padding:8px 0}.home-topbar .ht-inner{max-width:100%;padding:0 14px}.home-topbar a{font-size:.82em;padding:6px 14px}}
+
+/* ═══════ 四大流程落地衔接模块（增强版） ═══════ */
+  .flow-block{background:#f5f8fd;border:1px solid #dbe6f5;border-radius:14px;padding:24px 26px;margin:26px 0}
+  .flow-block h3{margin:0 0 12px;font-size:1.12em;color:#1a3a6b;font-weight:700}
+  .flow-hook{background:#eaf1fb;border-left:4px solid #2c5aa0;border-radius:8px;padding:13px 16px;margin:0 0 14px;font-size:.93em;color:#2c3e50;line-height:1.75}
+  .flow-hook b{color:#1a3a6b}
+  .flow-sub{margin:0 0 18px;font-size:.9em;color:#556}
+  .flow-sub strong{color:#1a3a6b}
+  .flow-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .flow-col{border-radius:12px;padding:16px 18px;background:#fff;box-shadow:0 1px 4px rgba(26,58,107,.05)}
+  .flow-h{font-weight:800;font-size:.98em;margin-bottom:10px;color:#1a3a6b;display:flex;align-items:center;gap:6px}
+  .flow-h .fh-tag{font-size:.7em;font-weight:700;color:#fff;border-radius:5px;padding:2px 7px;letter-spacing:.5px}
+  .flow-std .flow-h{color:#2c5aa0}.flow-std .fh-tag{background:#2c5aa0}
+  .flow-teach .flow-h{color:#2e7d5b}.flow-teach .fh-tag{background:#2e7d5b}
+  .flow-check .flow-h{color:#c47f17}.flow-check .fh-tag{background:#c47f17}
+  .flow-opt .flow-h{color:#8e44ad}.flow-opt .fh-tag{background:#8e44ad}
+  .flow-say{font-size:.88em;color:#37475e;background:#f6f9ff;border-radius:8px;padding:10px 12px;margin-bottom:12px;line-height:1.7;border-left:3px solid #cdd9ec}
+  .flow-say b{color:#1a3a6b}
+  .flow-do-t{font-size:.82em;font-weight:800;color:#556;margin:12px 0 6px}
+  .flow-do{margin:0;padding-left:19px}
+  .flow-do li{font-size:.85em;line-height:1.7;margin-bottom:6px;color:#4a5568}
+  .flow-standard{font-size:.84em;color:#2e7d32;background:#eef8f0;border-radius:7px;padding:9px 12px;margin-top:12px;line-height:1.65}
+  .flow-standard b{color:#1b5e20}
+  .flow-pit{font-size:.84em;color:#b3541e;background:#fdf3ea;border-radius:7px;padding:9px 12px;margin-top:8px;line-height:1.65}
+  .flow-pit b{color:#8a3d0a}
+  .flow-meta{margin:18px 0 0;font-size:.84em;color:#5a6478;background:#eef3fb;border-radius:8px;padding:12px 16px;line-height:1.7}
+  .flow-meta b{color:#1a3a6b}
+  @media(max-width:900px){
+    .flow-grid{grid-template-columns:1fr;gap:12px}
+    .flow-block{padding:18px 16px}
+    .flow-say,.flow-do li,.flow-standard,.flow-pit{font-size:.86em}
+  }
+/*@@ LAYOUT-UNIFY @@*/
+/* ═══════ 布局统一：标题框 = 内容框等宽 · 红米12.1寸平板完美适配 ═══════
+   横屏≈1280px → 统一 1300px；竖屏≤900px → 自适应留白
+   标题框(.header)与内容框(.container)使用完全相同的宽度规则 */
+.home-topbar .ht-inner{width:min(1300px,calc(100% - 32px))!important;max-width:1300px!important;margin:0 auto!important}
+.header{
+  width:min(1300px,calc(100% - 32px))!important;max-width:1300px!important;
+  margin:18px auto 0!important;padding:34px 30px!important;
+  border:0!important;border-radius:14px!important;
+  box-shadow:0 6px 22px rgba(0,0,0,.08)!important;
+}
+.container{
+  width:min(1300px,calc(100% - 32px))!important;max-width:1300px!important;
+  margin-left:auto!important;margin-right:auto!important;
+  padding-left:0!important;padding-right:0!important;
+}
+@media(max-width:900px){
+  .header{padding:24px 18px!important;margin-top:14px!important;border-radius:12px!important}
+}
+@media(max-width:600px){
+  .header{padding:20px 15px!important}
+}
+/*@@ LAYOUT-UNIFY-2 @@*/
+/* ═══ meta-bar（学习时长/配套练习条）与标题框/内容框同宽 ═══ */
+.meta-bar{
+  width:min(1300px,calc(100% - 32px))!important;max-width:1300px!important;
+  margin:14px auto 0!important;padding:14px 30px!important;
+  border:0!important;border-radius:12px!important;
+  box-shadow:0 4px 14px rgba(0,0,0,.06)!important;
+}
+@media(max-width:900px){
+  .meta-bar{padding:12px 16px!important;margin-top:12px!important}
+}
+/*@@ LAYOUT-UNIFY-3 @@*/
+/* ═══ 修正：box-sizing 兜底 + 容器内 header 自适应 + 表格竖屏防溢出 ═══ */
+.header,.container,.meta-bar,.home-topbar .ht-inner{box-sizing:border-box!important}
+.container > .header{width:auto!important;max-width:none!important;margin-left:0!important;margin-right:0!important}
+@media(max-width:900px){
+  table{max-width:100%!important}
+}
+
+/*@@ LAYOUT-UNIFY-4 @@*/
+body{padding:0!important;margin:0!important}
+
+/*@@ FLOW-GRID-2X2 @@*/
+.flow-grid{grid-template-columns:repeat(2,1fr)!important}
+@media(max-width:600px){.flow-grid{gap:10px}.flow-col{padding:12px}}
+
+/*@@ TABLE-FIT @@*/
+/* ═══ 窄屏/竖屏表格自适应屏宽（取消横向滚动，列宽随屏宽收缩、长内容自动换行） ═══ */
+@media(max-width:1100px){
+  table:not(.no-fit){display:table!important;width:100%!important;max-width:100%!important;min-width:0!important;table-layout:auto!important;overflow:visible!important;border-collapse:collapse!important}
+  table:not(.no-fit) th,table:not(.no-fit) td{overflow-wrap:break-word!important;word-break:break-word!important}
+}
+@media(max-width:900px){
+  table:not(.no-fit) th,table:not(.no-fit) td{padding:8px 6px!important;font-size:12px!important;line-height:1.5!important}
+}
+@media(max-width:600px){
+  table:not(.no-fit) th,table:not(.no-fit) td{padding:6px 5px!important;font-size:11px!important}
+}
+/*@@ DAY16-WF5 五维体系排版 @@*/
+.wf5-card h2{color:#4527a0;border-bottom:2px solid #ede7f6}
+.wf5-lead{line-height:1.85;color:#555;margin-bottom:16px}
+.wf5-lead strong{color:#5e35b1}
+
+/* 五维总览 */
+.wf5-overview{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0 8px}
+.wf5-ov-item{position:relative;border-radius:12px;padding:14px 8px 12px;text-align:center;color:#fff;box-shadow:0 3px 10px rgba(69,39,160,.12);overflow:hidden}
+.wf5-ov-item::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.22),transparent 60%);pointer-events:none}
+.wf5-ov-k{display:block;font-size:1.6em;font-weight:800;line-height:1;letter-spacing:1px;text-shadow:0 1px 3px rgba(0,0,0,.18)}
+.wf5-ov-n{display:block;font-size:.92em;font-weight:700;margin-top:4px}
+.wf5-ov-d{display:block;font-size:.72em;margin-top:5px;background:rgba(255,255,255,.22);border-radius:20px;padding:2px 6px;letter-spacing:.5px}
+.wf5-ov-a{background:linear-gradient(135deg,#3f8cff,#2662d9)}
+.wf5-ov-b{background:linear-gradient(135deg,#20b2aa,#0e8f88)}
+.wf5-ov-c{background:linear-gradient(135deg,#5e6ee0,#3d4bc0)}
+.wf5-ov-d{background:linear-gradient(135deg,#ff9f43,#e07b0e)}
+.wf5-ov-e{background:linear-gradient(135deg,#ef5b7b,#c93a5c)}
+.wf5-mnemonic{background:#faf7ff;border:1px solid #e6e1f6;border-radius:8px;padding:11px 15px;font-size:.92em;color:#4a3f6b;margin:12px 0 20px;line-height:1.7}
+.wf5-mnemonic strong{color:#5e35b1}
+
+/* 维度卡 */
+.wf5-dim{border-radius:14px;padding:18px 20px;margin:16px 0;border:1px solid #ece9f6;background:#fff}
+.wf5-dim-a{background:linear-gradient(180deg,#f5f9ff,#fff 90px)}
+.wf5-dim-b{background:linear-gradient(180deg,#f2fbfa,#fff 90px)}
+.wf5-dim-c{background:linear-gradient(180deg,#f4f5fd,#fff 90px)}
+.wf5-dim-d{background:linear-gradient(180deg,#fff8ee,#fff 90px)}
+.wf5-dim-e{background:linear-gradient(180deg,#fff5f7,#fff 90px)}
+.wf5-dim-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.wf5-badge{width:34px;height:34px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-size:1.05em;font-weight:800;color:#fff;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.14)}
+.wf5-dim-a .wf5-badge{background:#2662d9}.wf5-dim-b .wf5-badge{background:#0e8f88}
+.wf5-dim-c .wf5-badge{background:#3d4bc0}.wf5-dim-d .wf5-badge{background:#e07b0e}.wf5-dim-e .wf5-badge{background:#c93a5c}
+.wf5-dim-title{font-size:1.02em;font-weight:800;color:#333;letter-spacing:.2px}
+.wf5-count{margin-left:auto;font-size:.76em;font-weight:700;color:#7e57c2;background:#f1ecfb;border-radius:20px;padding:3px 12px;white-space:nowrap}
+.wf5-dim-tip{font-size:.9em;color:#5a6172;line-height:1.75;margin:8px 0 12px}
+.wf5-dim-tip strong{color:#4527a0}
+
+/* 统一表格 */
+.wf5-table{width:100%;border-collapse:collapse;margin:4px 0 0;border-radius:10px;overflow:hidden;box-shadow:0 1px 5px rgba(69,39,160,.06)}
+.wf5-table th{background:#eae6f7;color:#4527a0;padding:10px 13px;text-align:left;font-size:.88em;font-weight:800;border-bottom:2px solid #ddd5f0}
+.wf5-table td{padding:10px 13px;font-size:.88em;color:#4a4a55;line-height:1.65;border-bottom:1px solid #f1eef9;vertical-align:top}
+.wf5-table tbody tr:nth-child(even) td{background:#faf9fe}
+.wf5-table tbody tr:last-child td{border-bottom:0}
+.wf5-table td strong{color:#333}
+.wf5-param{font-weight:800;color:#d84315!important;white-space:nowrap;font-size:.95em!important}
+
+/* B 线 */
+.wf5-lines{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:6px}
+.wf5-line{background:#f2fbfa;border:1px solid #d6efec;border-radius:10px;padding:13px 15px}
+.wf5-line-t{font-weight:800;color:#0e7a74;margin-bottom:6px;font-size:.94em}
+.wf5-line-d{font-size:.87em;color:#4a5568;line-height:1.7}
+.wf5-line-d strong{color:#0e7a74}
+
+/* D 点 合格标准 */
+.wf5-criteria{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:10px;margin:4px 0 12px}
+.wf5-cri{border-radius:10px;padding:11px 13px;font-size:.85em;line-height:1.6}
+.wf5-cri-k{display:block;font-weight:800;margin-bottom:4px}
+.wf5-cri-ok{background:#eef8f0;color:#2e6b3d;border:1px solid #cfe9d6}.wf5-cri-ok .wf5-cri-k{color:#1b5e20}
+.wf5-cri-bad{background:#fdeef1;color:#a33248;border:1px solid #f6d4dc}.wf5-cri-bad .wf5-cri-k{color:#b3243c}
+.wf5-cri-warn{background:#fff8ea;color:#8a5b0a;border:1px solid #f4e0bb}.wf5-cri-warn .wf5-cri-k{color:#8a5b0a}
+
+/* E 七条 */
+.wf5-notes{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:6px}
+.wf5-note{display:flex;gap:10px;align-items:flex-start;background:#fff5f7;border:1px solid #f6dbe2;border-radius:10px;padding:11px 13px}
+.wf5-note-i{font-size:1.15em;line-height:1.2;flex-shrink:0}
+.wf5-note-t{font-weight:800;color:#b3243c;font-size:.9em;margin-bottom:3px}
+.wf5-note-d{font-size:.84em;color:#5a5560;line-height:1.62}
+.wf5-note:last-child{grid-column:1/-1}
+
+/* 9 部曲 */
+.wf5-nine{margin-top:20px;background:#f7f5fd;border:1px solid #e6e1f6;border-radius:14px;padding:18px 20px}
+.wf5-nine-head{font-weight:800;color:#4527a0;font-size:1.02em;margin-bottom:8px}
+.wf5-nine-sub{font-size:.76em;font-weight:600;color:#8a7fc0;background:#eee9fa;border-radius:20px;padding:3px 11px;margin-left:8px}
+.wf5-steps{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
+.wf5-step{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid #ded6f2;border-radius:20px;padding:6px 13px 6px 6px;font-size:.83em;font-weight:700;color:#4a3f6b;box-shadow:0 1px 4px rgba(69,39,160,.06)}
+.wf5-step i{font-style:normal;width:20px;height:20px;border-radius:50%;background:#7e57c2;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.82em;font-weight:800}
+.wf5-nine .wf5-dim-tip{margin:0 0 8px}
+
+@media(max-width:900px){
+  .wf5-overview{grid-template-columns:repeat(5,1fr);gap:6px}
+  .wf5-ov-item{padding:10px 4px 9px}
+  .wf5-ov-k{font-size:1.3em}.wf5-ov-n{font-size:.82em}.wf5-ov-d{font-size:.66em}
+  .wf5-lines,.wf5-notes{grid-template-columns:1fr}
+  .wf5-criteria{grid-template-columns:1fr}
+  .wf5-dim{padding:15px 15px}
+  .wf5-badge{width:30px;height:30px;font-size:.95em}
+  .wf5-dim-title{font-size:.96em}
+  .wf5-step{font-size:.8em;padding:5px 11px 5px 5px}
+}
+@media(max-width:600px){
+  .wf5-overview{grid-template-columns:repeat(5,1fr);gap:4px}
+  .wf5-ov-k{font-size:1.1em}.wf5-ov-d{display:none}
+  .wf5-note:last-child{grid-column:auto}
+}
+
+</style>
+</head>
+<body>
+<div class="home-topbar"><div class="ht-inner"><a href="../index.html">🏠 返回首页</a></div></div>
+
+<div class="header">
+  <span class="day-tag">📅 第3周 · Day 16</span>
+  <h1>🔧 镜架调整与整形技术</h1>
+  <div class="subtitle">模块：技能 Skills | 今日主题：常见配戴问题 · 调整工具 · 整形步骤</div>
+</div>
+<div class="container">
+
+<div class="lm-block lm-goal">
+  <h3>🎯 今日学习目标（学完你应该能做到）</h3>
+  <ul class="lm-list">
+      <li>认识调整工具：调校钳（平口/圆口）、螺丝刀、加热器、垫布、垫片，能说出各自用途</li>
+      <li>能判断 5 种常见佩戴问题：夹脸、压鼻、下滑、镜腿高低不平、镜架扭曲</li>
+      <li>掌握标准调整流程：先看再问、先软后硬、小步微调、随时试戴</li>
+      <li>知道材质差异：板材/TR90 需加热后调整，金属可小幅冷调，钛架回弹大要更耐心</li>
+      <li>明白调整边界：贵重镜架、焊接断裂、镜片裂纹等情况必须报告师傅</li>
+  </ul>
+  <p class="lm-meta">⏱ 学习量控制：约 <strong>2 小时</strong> —— 精读讲解 60 分钟 ｜ 动手实践 45 分钟 ｜ 自测与订正 15 分钟</p>
+</div>
+
+  <div class="section">
+    <h2>🛠️ 第一部分：调整工具认知</h2>
+    <div class="tools-box">
+      <h4>🔧 常用调整工具</h4>
+      <ul>
+        <li><strong>镜架调整钳</strong>：专用钳具，分鼻托调整钳、腿弯调整钳、框形调整钳等类型</li>
+        <li><strong>螺丝刀（眼镜专用）</strong>：紧固松动的螺丝，型号有十字和一字</li>
+        <li><strong>加热机/热风枪</strong>：加热板材、TR-90镜架，使其软化后方可调整</li>
+        <li><strong>超声波清洗机</strong>：清洗镜架、去除污垢和皮肤油脂</li>
+        <li><strong>镜片检测仪（焦度计）</strong>：检测镜片度数是否与处方一致</li>
+      </ul>
+    </div>
+    <div class="warning-box">
+      <div class="label">⚠️ 调整前必看</div>
+      <ul style="padding-left:18px;">
+        <li>板材/TR-90镜架必须加热后才能调整，不可生硬弯折，否则镜架断裂</li>
+        <li>金属镜架可直接用钳具调整，但用力要均匀缓慢</li>
+        <li>调整前先询问顾客哪里不舒服，对症调整</li>
+        <li>新手必须在师傅监督下操作，不可独立调整贵重镜架</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🔍 第二部分：常见配戴问题与调整方法</h2>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <h4>😣 镜架下滑（鼻托滑）</h4>
+        <div class="symptom">症状：眼镜往下滑，经常需要推上去</div>
+        <div class="fix">调整：收紧两侧鼻托，使鼻托与鼻翼贴合更紧；或调整腿弯增加耳后摩擦</div>
+      </div>
+      <div class="problem-card">
+        <h4>😖 单侧压鼻（鼻托偏）</h4>
+        <div class="symptom">症状：一侧鼻梁酸痛，受力不均</div>
+        <div class="fix">调整：检查两侧鼻托高度是否对称，调整低的一侧鼻托向上</div>
+      </div>
+      <div class="problem-card">
+        <h4>👂 耳后压痛</h4>
+        <div class="symptom">症状：戴一段时间后耳后、耳上方疼痛</div>
+        <div class="fix">调整：调整腿弯位置，使弯曲点对应耳后软组织，减少硬性压迫</div>
+      </div>
+      <div class="problem-card">
+        <h4>🔲 镜面歪斜（左右不对称）</h4>
+        <div class="symptom">症状：镜面水平不一，一高一低</div>
+        <div class="fix">调整：调整铰链角度使两腿等高；对照顾客面部调整至水平</div>
+      </div>
+      <div class="problem-card">
+        <h4>😒 镜框太宽（松动）</h4>
+        <div class="symptom">症状：眼镜戴上晃动，不稳固</div>
+        <div class="fix">调整：收紧镜腿（向内调），适当减小张开角度</div>
+      </div>
+      <div class="problem-card">
+        <h4>😣 镜框夹头（太紧）</h4>
+        <div class="symptom">症状：戴上后两侧太紧，头部感到压迫</div>
+        <div class="fix">调整：向外展开镜腿，增大张开角度，注意均匀调整</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>👨‍🔧 第三部分：标准调整流程</h2>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="title">询问症状</div>
+          <div class="desc">"您哪里戴着不舒服？" 明确是下滑、压鼻、歪斜还是太紧/太松。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="title">观察诊断</div>
+          <div class="desc">让顾客戴上眼镜，观察从正面、侧面的状态，找出问题所在。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="title">加热（板材/TR-90）</div>
+          <div class="desc">板材镜架放入加热机约30秒使其软化，金属镜架跳过此步骤。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="title">实施调整</div>
+          <div class="desc">使用专用钳具缓慢调整，小幅度多次调整，不可一次用力过猛。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="title">试戴确认</div>
+          <div class="desc">让顾客戴上，询问是否有改善："现在感觉怎么样？还有哪里不舒服？"</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="title">清洁归还</div>
+          <div class="desc">调整完毕后用超声波清洗或手动擦拭，双手递还给顾客，说明保养建议。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card wf5-card">
+    <h2>📐 第四部分：专业调校五维体系（A 面 · B 线 · C 角度 · D 点 · E 注意）</h2>
+    <p class="wf5-lead">门店《眼镜调校标准手册》把所有调校作业归纳为 <strong>A/B/C/D/E 五维体系</strong>——这是带教与考核的统一语言。先记住口诀，再逐维拆解：</p>
+
+    <!-- 五维总览 -->
+    <div class="wf5-overview">
+      <div class="wf5-ov-item wf5-ov-a"><span class="wf5-ov-k">A</span><span class="wf5-ov-n">面</span><span class="wf5-ov-d">看 3 面</span></div>
+      <div class="wf5-ov-item wf5-ov-b"><span class="wf5-ov-k">B</span><span class="wf5-ov-n">线</span><span class="wf5-ov-d">对 2 线</span></div>
+      <div class="wf5-ov-item wf5-ov-c"><span class="wf5-ov-k">C</span><span class="wf5-ov-n">角度</span><span class="wf5-ov-d">调 5 角</span></div>
+      <div class="wf5-ov-item wf5-ov-d"><span class="wf5-ov-k">D</span><span class="wf5-ov-n">点</span><span class="wf5-ov-d">找 1 点</span></div>
+      <div class="wf5-ov-item wf5-ov-e"><span class="wf5-ov-k">E</span><span class="wf5-ov-n">注意</span><span class="wf5-ov-d">记 7 注意</span></div>
+    </div>
+    <p class="wf5-mnemonic"><strong>口诀：</strong>A 看 3 面 · B 对 2 线 · C 调 5 角 · D 找 1 点 · E 记 7 注意</p>
+
+    <!-- A 面 -->
+    <section class="wf5-dim wf5-dim-a">
+      <div class="wf5-dim-head"><span class="wf5-badge">A</span><span class="wf5-dim-title">面 · 镜面的三向校验</span><span class="wf5-count">3 面</span></div>
+      <p class="wf5-dim-tip">口诀：<strong>正面看水平、平面对前后、侧面查扭曲</strong>。</p>
+      <table class="wf5-table">
+        <thead><tr><th style="width:120px">校验面</th><th style="width:130px">观察方向</th><th>合格标准</th></tr></thead>
+        <tbody>
+          <tr><td><strong>水平面</strong></td><td>正面观</td><td>左右镜框上缘等高，无一高一低</td></tr>
+          <tr><td><strong>垂直面</strong></td><td>平面观（俯视）</td><td>两镜片前后位置一致，无前后错位</td></tr>
+          <tr><td><strong>扭曲面</strong></td><td>侧面观</td><td>镜面无扭曲变形，两侧镜面弯对称</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- B 线 -->
+    <section class="wf5-dim wf5-dim-b">
+      <div class="wf5-dim-head"><span class="wf5-badge">B</span><span class="wf5-dim-title">线 · 镜腿的两条线</span><span class="wf5-count">2 线</span></div>
+      <div class="wf5-lines">
+        <div class="wf5-line">
+          <div class="wf5-line-t">📏 镜腿流线（展开观）</div>
+          <div class="wf5-line-d">两镜腿展开后，从铰链到脚套的流线应<strong>左右对称、等长等弧</strong>。</div>
+        </div>
+        <div class="wf5-line">
+          <div class="wf5-line-t">🔗 合拢叠线</div>
+          <div class="wf5-line-d">镜腿合拢后应<strong>重叠、不交叉</strong>，桩头无松动异响。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- C 角度 -->
+    <section class="wf5-dim wf5-dim-c">
+      <div class="wf5-dim-head"><span class="wf5-badge">C</span><span class="wf5-dim-title">角度 · 五个关键角度</span><span class="wf5-count">5 角</span></div>
+      <table class="wf5-table">
+        <thead><tr><th style="width:130px">角度</th><th style="width:110px">标准参数</th><th>意义与调整要点</th></tr></thead>
+        <tbody>
+          <tr><td><strong>镜面前弯弧度</strong></td><td class="wf5-param">170°–180°</td><td>镜面沿垂直轴的弯度，贴合面部曲线；过大压迫太阳穴，过小显呆板</td></tr>
+          <tr><td><strong>倾斜角（前倾角）</strong></td><td class="wf5-param">8°–15°</td><td>镜平面与垂直面的夹角，保证视线垂直入射镜片；过大镜片光学性能打折</td></tr>
+          <tr><td><strong>外张角</strong></td><td class="wf5-param">80°–100°</td><td>镜腿展开后与镜框平面的夹角；太紧夹头、太松下滑，按脸型调整</td></tr>
+          <tr><td><strong>脚套弯弧</strong></td><td class="wf5-param">135°±10°</td><td>耳勾（脚套）弯点弧度；<strong>冬季需加热后调整防断裂</strong></td></tr>
+          <tr><td><strong>内切度</strong></td><td class="wf5-param">25°–35°</td><td>脚套内收角度，使镜腿贴合头型两侧</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- D 点 -->
+    <section class="wf5-dim wf5-dim-d">
+      <div class="wf5-dim-head"><span class="wf5-badge">D</span><span class="wf5-dim-title">点 · 鼻托支撑点</span><span class="wf5-count">1 点</span></div>
+      <p class="wf5-dim-tip"><strong>鼻托的支撑点要服帖</strong>：鼻托面与鼻梁均匀贴合、不压迫。</p>
+      <div class="wf5-criteria">
+        <div class="wf5-cri wf5-cri-ok"><span class="wf5-cri-k">✔ 合格</span>贴合但不压出红印，托叶与皮肤间能插进一张纸</div>
+        <div class="wf5-cri wf5-cri-bad"><span class="wf5-cri-k">✖ 过紧</span>压出深红印</div>
+        <div class="wf5-cri wf5-cri-warn"><span class="wf5-cri-k">⚠ 过松</span>留缝晃动</div>
+      </div>
+      <p class="wf5-dim-tip">有独立鼻托的镜架可调鼻托<strong>上下、左右、前后的角度与间距</strong>。</p>
+    </section>
+
+    <!-- E 注意 -->
+    <section class="wf5-dim wf5-dim-e">
+      <div class="wf5-dim-head"><span class="wf5-badge">E</span><span class="wf5-dim-title">注意 · 调整七条</span><span class="wf5-count">7 条</span></div>
+      <p class="wf5-dim-tip">口诀：<strong>紧螺丝 · 先沟通 · 防老化 · 要垫布 · 先清洗 · 莫拧紧 · 讲保养</strong>。</p>
+      <div class="wf5-notes">
+        <div class="wf5-note"><span class="wf5-note-i">🔧</span><div><div class="wf5-note-t">紧螺丝</div><div class="wf5-note-d">调整前先检查并紧固桩头、铰链螺丝，避免带病作业。</div></div></div>
+        <div class="wf5-note"><span class="wf5-note-i">💬</span><div><div class="wf5-note-t">先沟通</div><div class="wf5-note-d">动手前先问清顾客哪里不舒服，对症调整，不凭感觉。</div></div></div>
+        <div class="wf5-note"><span class="wf5-note-i">⚠️</span><div><div class="wf5-note-t">防老化</div><div class="wf5-note-d">老化、脆化的板材严禁直接加热硬掰，易断裂。</div></div></div>
+        <div class="wf5-note"><span class="wf5-note-i">🧵</span><div><div class="wf5-note-t">要垫布</div><div class="wf5-note-d">钳具夹持处必须垫布或垫片，防止夹伤镀层、留压痕。</div></div></div>
+        <div class="wf5-note"><span class="wf5-note-i">💧</span><div><div class="wf5-note-t">先清洗</div><div class="wf5-note-d">调整前先清洗镜架，汗渍油污会影响判断与夹持。</div></div></div>
+        <div class="wf5-note"><span class="wf5-note-i">🚫</span><div><div class="wf5-note-t">莫拧紧</div><div class="wf5-note-d">螺丝拧到“不松动”即可，过度拧紧会滑丝、崩裂。</div></div></div>
+        <div class="wf5-note"><span class="wf5-note-i">📘</span><div><div class="wf5-note-t">讲保养</div><div class="wf5-note-d">调整后向顾客交代保养要点（双手摘戴、远离高温、定期清洗）。</div></div></div>
+      </div>
+    </section>
+
+    <!-- 9 部曲 -->
+    <section class="wf5-nine">
+      <div class="wf5-nine-head">🏆 标准整形 9 部曲 <span class="wf5-nine-sub">进阶 · 对齐《整形细节三十项》第 16 项</span></div>
+      <p class="wf5-dim-tip">熟练掌握 A–E 五维后，按门店标准整形 9 部曲完成一次完整整形。每一部都遵循“<strong>先看再动、小幅多次、随时试戴</strong>”。</p>
+      <div class="wf5-steps">
+        <span class="wf5-step"><i>1</i>熟悉镜架</span>
+        <span class="wf5-step"><i>2</i>检查螺丝</span>
+        <span class="wf5-step"><i>3</i>板材加热</span>
+        <span class="wf5-step"><i>4</i>调面弯</span>
+        <span class="wf5-step"><i>5</i>调外张角</span>
+        <span class="wf5-step"><i>6</i>调前倾角</span>
+        <span class="wf5-step"><i>7</i>调耳勾弯点</span>
+        <span class="wf5-step"><i>8</i>调鼻托</span>
+        <span class="wf5-step"><i>9</i>整体复检</span>
+      </div>
+      <p class="wf5-dim-tip">镜眼距标准：<strong>12MM</strong>（镜片后顶点至角膜前顶点距离），整形时同步核对光学中心位置。</p>
+    </section>
+
+    <div class="highlight-box blue">
+      <p><strong>材质调整边界</strong>：板材 / TR90 必须<strong>加热软化后</strong>再调，不可生硬弯折；金属架可小幅冷调但用力要均匀缓慢；<strong>纯钛架回弹大、更要耐心</strong>；贵重镜架、焊接断裂、镜片裂纹等情况必须报告师傅，不得自行处理。</p>
+    </div>
+  </div>
+
+<!-- LM-START -->
+<div class="lm-block lm-practice">
+  <h3>🔧 动手实践任务（今日必做）</h3>
+    <div class="lm-pr">
+      <div class="lm-pr-t">任务 1：工具认领（约 15 分钟）</div>
+      <div class="lm-pr-d">把 6 件工具拿起并说出用途与注意事项；在师傅示范下，对一副旧镜架完成一次「看问题 → 选工具 → 微调 → 试戴」的完整闭环。</div>
+      <div class="lm-pr-o">✅ 完成标准：能说出每件工具用途，操作中做到「小步微调、随时试戴」。</div>
+    </div>
+    <div class="lm-pr">
+      <div class="lm-pr-t">任务 2：五个常见问题逐项排除（约 25 分钟）</div>
+      <div class="lm-pr-d">找 3 副有问题的旧镜架，逐副判断问题类型、说明调整方向，并实际调整 1～2 处。</div>
+      <div class="lm-pr-o">✅ 完成标准：3 副的问题都能准确命名，调整后戴上明显改善且无新问题。</div>
+    </div>
+</div>
+<div class="lm-block lm-faq">
+  <h3>⚠️ 常见问题与注意事项</h3>
+    <details class="lm-q">
+      <summary>❓ 调整时把镜架弄坏了怎么办？</summary>
+      <div class="lm-a">第一时间告知师傅，不隐瞒、不私自更换配件。多数小变形可修复；判断失误是学习成本，隐瞒才是真正的问题。</div>
+    </details>
+    <details class="lm-q">
+      <summary>❓ 顾客嫌紧、要求掰松，直接掰可以吗？</summary>
+      <div class="lm-a">不能凭手感硬掰。应先问清哪里紧（太阳穴 / 鼻梁 / 耳后），再针对性调整；金属小幅冷调，板材/TR90 先加热软化，否则容易裂。</div>
+    </details>
+    <details class="lm-q">
+      <summary>❓ 鼻托应该贴住鼻子还是留缝？</summary>
+      <div class="lm-a">要贴合但不压迫，能插进一张纸的松紧度较合适。压出红印、留缝晃动都不行。有独立鼻托的可以调角度与间距。</div>
+    </details>
+    <details class="lm-q">
+      <summary>❓ 镀色/有花纹的镜架调整要注意什么？</summary>
+      <div class="lm-a">避免加热过度导致褪色、起皮，夹持处必须垫布或垫片，防止留下压痕。贵重镜架建议先问师傅再动手。</div>
+    </details>
+</div>
+
+<!-- LM-END -->
+
+<!-- FLOW-START -->
+<div class="lm-block flow-block">
+  <h3>🔗 四大流程落地衔接 — 本日内容如何进入门店培训体系</h3>
+  <div class="flow-hook">💡 <b>今天你只要记住这一句：</b>今天上手‘镜架整形’——这是手上功夫，力度、角度、复检，三步都不能少。</div>
+  <p class="flow-sub">本日内容对应：<strong>加工调整工作站（第 6 站）· 镜架调整</strong>　｜　把今天学的，直接接入「标准—带教—考核—优化」闭环。</p>
+  <div class="flow-grid">
+<div class="flow-col flow-std"><div class="flow-h">① 标准 <span class="fh-tag">教什么</span></div><div class="flow-say"><b>一句话：</b>掌握镜架整形、鼻托调整、镜腿弯折的标准手法，调整后必须复检佩戴效果。</div><div class="flow-do-t">📋 具体怎么做</div><ul class="flow-do"><li>掌握基础调整手法：镜腿外扩/内收、鼻托高低、镜腿弯折</li><li>牢记‘边调边试’：每调一处，让顾客试戴再决定下一步</li><li>会判断常见变形：镜架歪斜、镜腿松紧、鼻托错位</li></ul><div class="flow-standard"><b>✔ 完成标准：</b>能独立完成 3 次镜架调整并通过佩戴复检，即达标。</div><div class="flow-pit"><b>⚠ 常见坑：</b>最容易犯的错是‘用力过猛’——镜架调整讲究‘小幅多次’，一次掰太狠会掰断。</div></div>
+<div class="flow-col flow-teach"><div class="flow-h">② 带教 <span class="fh-tag">怎么教</span></div><div class="flow-say"><b>一句话：</b>训练员手把手示范调整手法，强调力度与角度，新人在旧镜架上反复练。</div><div class="flow-do-t">📋 具体怎么做</div><ul class="flow-do"><li>训练员示范每种调整手法，讲清‘用多大力、朝哪个方向’</li><li>新人在废旧镜架上反复练习，训练员逐个纠正</li><li>让新人给真人试戴调整一次，训练员点评</li></ul><div class="flow-standard"><b>✔ 完成标准：</b>新人能在废旧镜架上规范完成调整，并给真人调整一次，即完成。</div><div class="flow-pit"><b>⚠ 常见坑：</b>先在废镜架上练手——直接上顾客镜架，调坏了是要赔的。</div></div>
+<div class="flow-col flow-check"><div class="flow-h">③ 考核 <span class="fh-tag">是否达标</span></div><div class="flow-say"><b>一句话：</b>用真实调整实操检验手法规范度与复检意识。</div><div class="flow-do-t">📋 具体怎么做</div><ul class="flow-do"><li>实操：完成 3 次镜架调整并通过佩戴复检</li><li>调整手法评分达标</li></ul><div class="flow-standard"><b>✔ 完成标准：</b>3 次调整规范、复检到位，即通过。</div><div class="flow-pit"><b>⚠ 常见坑：</b>考核重点是‘复检’——调完不复检，等于没调。</div></div>
+<div class="flow-col flow-opt"><div class="flow-h">④ 优化 <span class="fh-tag">持续迭代</span></div><div class="flow-say"><b>一句话：</b>如果顾客反馈‘调完还不舒服’，复盘调整标准并补充案例。</div><div class="flow-do-t">📋 具体怎么做</div><ul class="flow-do"><li>分析‘调整后仍不适’的反馈案例</li><li>针对性修订调整标准、补充典型案例</li></ul><div class="flow-standard"><b>✔ 完成标准：</b>形成调整标准优化项，即完成优化。</div><div class="flow-pit"><b>⚠ 常见坑：</b>顾客说不舒服，可能是‘标准里只讲了怎么调，没讲怎么判断调到位’——这正是要补的。</div></div>
+  </div>
+  <p class="flow-meta">👤 <b>责任角色：</b>新员工（学习执行）· 训练员（带教施教）· 值班经理（检查考核）· 门店负责人（审批优化）</p>
+</div>
+<!-- FLOW-END -->
+
+  <div class="nav-footer">
+    <a class="nav-btn outline" href="Day_15_学习内容.html">← Day 15</a>
+    <a class="nav-btn outline" href="../index.html">🏠 首页</a>
+    
+    <a class="nav-btn" href="Day_16_练习题.html">今日练习题 →</a>
+  </div>
+</div>
+</body>
+</html>
