@@ -1,0 +1,1599 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>眼镜门店新员工8周成才 — 完整课程总览</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --brand:#1a237e; --brand2:#3949ab; --ink:#2c3140; --muted:#7a8194;
+    --bg:#f4f6fb; --line:#e9ecf6; --radius:18px;
+    --shadow:0 4px 18px rgba(26,35,126,.08);
+    --shadow-lg:0 14px 34px rgba(26,35,126,.16);
+  }
+  body{
+    font-family:'Microsoft YaHei','PingFang SC',Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;
+    -webkit-text-size-adjust:100%
+  }
+  a{text-decoration:none}
+
+  /* ── Hero ── */
+  .hero{
+    background:linear-gradient(135deg,#1565c0 0%,#283593 52%,#4a148c 100%);
+    color:#fff;padding:48px 40px 40px;text-align:center;position:relative;overflow:hidden
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+  }
+  .hero-inner{position:relative;z-index:1;max-width:900px;margin:0 auto}
+  .hero h1{font-size:2.6em;font-weight:800;margin-bottom:12px;letter-spacing:2px;text-shadow:0 2px 8px rgba(0,0,0,.25)}
+  .hero .subtitle{font-size:1.08em;opacity:.9;margin-bottom:22px;letter-spacing:1px}
+  .badge-row{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(255,255,255,.16);backdrop-filter:blur(6px);
+    border-radius:24px;padding:7px 18px;font-size:.88em;font-weight:600;letter-spacing:.5px
+  }
+
+  /* ── Container ── */
+  .container{max-width:1300px;margin:0 auto;padding:40px 28px}
+
+  /* ── Section Title ── */
+  .section-title{
+    display:flex;align-items:center;gap:12px;
+    font-size:1.32em;font-weight:700;color:var(--brand);
+    margin:44px 0 18px;padding-bottom:12px;
+    border-bottom:2px solid #e8eaf6
+  }
+  .section-title .icon-circle{
+    width:36px;height:36px;border-radius:50%;
+    background:linear-gradient(135deg,#3949ab,#1a237e);
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:1em;flex-shrink:0
+  }
+
+  /* ── 课程工具栏 ── */
+  .course-toolbar{
+    background:#fff;border-radius:14px;padding:14px 18px;
+    box-shadow:var(--shadow);margin-bottom:22px;
+    display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between
+  }
+  .tb-search{flex:1;min-width:220px;position:relative}
+  .tb-search input{
+    width:100%;font-family:inherit;font-size:.9em;color:var(--ink);
+    border:1.5px solid var(--line);border-radius:10px;
+    padding:10px 14px 10px 38px;outline:none;transition:.2s
+  }
+  .tb-search input:focus{border-color:var(--brand2);box-shadow:0 0 0 3px rgba(57,73,171,.12)}
+  .tb-search::before{content:'🔍';position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:.9em;opacity:.6}
+  .tb-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .tb-btn{
+    border:1.5px solid var(--line);background:#fff;color:#45506e;
+    font-family:inherit;font-size:.85em;font-weight:700;cursor:pointer;
+    padding:9px 16px;border-radius:10px;transition:.2s;white-space:nowrap
+  }
+  .tb-btn:hover{border-color:var(--brand2);color:var(--brand2);background:#f5f7ff}
+  .tb-switch{display:inline-flex;align-items:center;gap:6px;font-size:.85em;color:#45506e;cursor:pointer;white-space:nowrap}
+  .tb-switch input{width:16px;height:16px;accent-color:var(--brand2);cursor:pointer}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.78em;color:var(--muted)}
+  .legend i{
+    display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px
+  }
+
+  /* ── Stats Grid ── */
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:34px}
+  .stat-card{
+    background:#fff;border-radius:16px;padding:26px 18px;text-align:center;
+    box-shadow:var(--shadow);
+    transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden
+  }
+  .stat-card::after{
+    content:var(--icon);position:absolute;right:14px;bottom:8px;
+    font-size:2.9em;opacity:.08;line-height:1
+  }
+  .stat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .stat-number{
+    font-size:2.9em;font-weight:800;line-height:1;margin-bottom:8px;
+    background:linear-gradient(135deg,var(--accent),#1a237e);
+    -webkit-background-clip:text;background-clip:text;color:transparent
+  }
+  .stat-label{color:var(--muted);font-size:.9em;font-weight:600}
+
+  /* ── 四大流程体系 ── */
+  .flow-sec{background:#fff;border-radius:18px;padding:28px 30px;box-shadow:var(--shadow);margin-bottom:34px}
+  .flow-intro{font-size:.93em;color:#55607a;line-height:1.9;margin:0 0 20px}
+  .flow-intro strong{color:var(--brand)}
+  .flow-four{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .flow-card{border-radius:14px;padding:18px 18px 16px;background:#f8fafd;position:relative}
+  .flow-card .fc-step{position:absolute;top:14px;right:16px;font-size:1.5em;font-weight:800;opacity:.12;color:#1a237e}
+  .flow-card .fc-tag{display:inline-block;font-size:.72em;font-weight:800;color:#fff;border-radius:6px;padding:2px 9px;margin-bottom:10px;letter-spacing:.5px}
+  .flow-card .fc-title{font-size:1em;font-weight:800;color:#1a237e;margin-bottom:4px}
+  .flow-card .fc-one{font-size:.82em;color:#7a8194;font-weight:600;margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed #e3e8f2}
+  .flow-card .fc-body{font-size:.8em;color:#556;line-height:1.7}
+  .flow-card .fc-body b{color:#3949ab;display:block;margin-top:8px;font-size:.95em}
+  .fc1 .fc-tag{background:#2c5aa0}
+  .fc2 .fc-tag{background:#2e7d5b}
+  .fc3 .fc-tag{background:#c47f17}
+  .fc4 .fc-tag{background:#8e44ad}
+
+  /* ── 培训路径里程碑 ── */
+  .mile-sec{background:#fff;border-radius:18px;padding:28px 30px;box-shadow:var(--shadow);margin-bottom:34px}
+  .mile-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .mile-card{background:#f8fafd;border-radius:14px;padding:18px}
+  .mile-card .mc-day{font-size:.78em;font-weight:800;color:#fff;background:#3949ab;border-radius:6px;display:inline-block;padding:3px 11px;margin-bottom:10px}
+  .mile-card .mc-name{font-weight:800;color:#1a237e;font-size:.98em;margin-bottom:8px}
+  .mile-card .mc-txt{font-size:.82em;color:#556;line-height:1.7}
+  .mile-card:nth-child(1) .mc-day{background:#e91e63}
+  .mile-card:nth-child(2) .mc-day{background:#3949ab}
+  .mile-card:nth-child(3) .mc-day{background:#00897b}
+  .mile-card:nth-child(4) .mc-day{background:#6a1b9a}
+
+  /* ── 工具清单 ── */
+  .tool-sec{background:#fff;border-radius:18px;padding:28px 30px;box-shadow:var(--shadow);margin-bottom:34px}
+  .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .tool-item{background:#f8fafd;border-radius:12px;padding:15px 16px}
+  .tool-item .ti-name{font-weight:700;color:#2c5aa0;font-size:.9em;margin-bottom:6px}
+  .tool-item .ti-use{font-size:.79em;color:#667;line-height:1.65}
+
+  /* ── 门店标准手册（工作流程）── */
+  .wf-intro{font-size:.9em;color:#55607a;line-height:1.85;margin:0 0 18px}
+  .wf-intro strong{color:#0b6ab0}
+  .wf-group{font-size:.82em;font-weight:800;color:#0b6ab0;letter-spacing:.5px;margin:18px 0 9px;padding-left:9px;border-left:4px solid #0b6ab0}
+  .wf-group:first-of-type{margin-top:0}
+  .wf-group em{font-style:normal;font-weight:600;color:#8a93a8;font-size:.9em;margin-left:6px}
+
+  /* ── 手册区块 展开 / 收起 ── */
+  .wf-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .wf-head .section-title{flex:1;margin:0 0 0 0!important;border-bottom:2px solid #e8eaf6;padding-bottom:12px}
+  .wf-toggle{
+    display:inline-flex;align-items:center;gap:7px;flex-shrink:0;
+    border:1.5px solid #c9e2f2;background:#f2f9ff;color:#0b6ab0;
+    font-family:inherit;font-size:.85em;font-weight:800;cursor:pointer;
+    padding:9px 18px;border-radius:24px;transition:.2s;white-space:nowrap;margin-bottom:12px
+  }
+  .wf-toggle:hover{background:#e2f2ff;border-color:#0b6ab0;transform:translateY(-2px)}
+  .wf-toggle .wft-arrow{font-size:.85em;transition:transform .28s;display:inline-block}
+  .wf-toggle[aria-expanded="false"] .wft-arrow{transform:rotate(-90deg)}
+
+  /* 内容折叠动画 */
+  .wf-body{overflow:hidden;transition:height .32s ease,opacity .28s ease}
+  .wf-body[hidden]{display:none}
+  .wf-sec.collapsed .wf-body{opacity:.001;height:0!important}
+  .wf-sec.collapsed .wf-body[hidden]{display:block}
+
+  .wf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .wf-item{display:flex;flex-direction:column;background:#f5fbff;border:1.5px solid #dcecf8;border-radius:12px;padding:14px 16px;transition:.2s}
+  .wf-item:hover{background:#eaf6ff;border-color:#0b6ab0;transform:translateY(-3px);box-shadow:0 8px 20px rgba(11,106,176,.14)}
+  .wf-item .wi-name{font-weight:800;color:#0b6ab0;font-size:.9em;margin-bottom:6px}
+  .wf-item .wi-use{font-size:.78em;color:#667;line-height:1.65;flex:1}
+  .wf-item .wi-go{font-size:.76em;font-weight:800;color:#0b6ab0;margin-top:10px}
+  .sys-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;background:linear-gradient(135deg,#2c5aa0,#1a237e);color:#fff;font-size:.88em;font-weight:700;padding:11px 24px;border-radius:26px;transition:.2s}
+  .sys-link:hover{filter:brightness(1.1);transform:translateY(-2px)}
+
+  /* ── 学 · 练 · 考 ── */
+  .slk-sec{background:#fff;border-radius:18px;padding:28px 30px;box-shadow:var(--shadow);margin-bottom:34px}
+  .slk-intro{font-size:.93em;color:#55607a;line-height:1.9;margin:0 0 22px}
+  .slk-intro strong{color:#c1440e}
+  .slk-bar{display:flex;width:100%;border-radius:14px;overflow:hidden;box-shadow:0 8px 22px rgba(26,35,126,.14);margin-bottom:10px}
+  .slk-seg{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#fff;padding:14px 6px;text-align:center;min-width:0}
+  .slk-seg .sg-name{font-size:.88em;font-weight:800;letter-spacing:2px}
+  .slk-seg .sg-pct{font-size:1.8em;font-weight:800;line-height:1.15}
+  .slk-seg .sg-hint{font-size:.7em;opacity:.9;letter-spacing:.5px}
+  .sg-learn{flex:30;background:linear-gradient(135deg,#3f6fbf,#2c5aa0)}
+  .sg-practice{flex:50;background:linear-gradient(135deg,#f59250,#d9601a);box-shadow:inset 0 0 0 3px rgba(255,255,255,.6)}
+  .sg-exam{flex:20;background:linear-gradient(135deg,#8e44ad,#6a1b9a)}
+  .slk-scaleline{display:flex;font-size:.72em;color:#b3b8c6;letter-spacing:.5px;margin:0 0 24px 2px}
+  .slk-grid{display:grid;grid-template-columns:repeat(3,1fr)!important;gap:14px;align-items:stretch}
+  .slk-card{background:#f8fafd;border-radius:14px;padding:18px;border:1.5px solid transparent;display:flex;flex-direction:column;min-width:0}
+  .slk-card .sk-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+  .slk-card .sk-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.05em;color:#fff;flex-shrink:0}
+  .slk-card .sk-name{font-size:1.02em;font-weight:800;color:#1a237e}
+  .slk-card .sk-ratio{font-size:.74em;font-weight:800;color:#fff;border-radius:20px;padding:3px 10px;margin-left:auto;white-space:nowrap}
+  .slk-card .sk-sub{font-size:.76em;font-weight:700;color:#8a93a8;margin-bottom:7px}
+  .slk-card .sk-desc{font-size:.82em;color:#556;line-height:1.75}
+  .slk-card .sk-list{font-size:.79em;color:#667;line-height:1.8;margin-top:9px;list-style:none}
+  .slk-card .sk-list li{position:relative;padding-left:14px}
+  .slk-card .sk-list li::before{content:'▸';position:absolute;left:0;color:#9aa6c4}
+  .sk-learn .sk-icon,.sk-learn .sk-ratio{background:#2c5aa0}
+  .sk-practice{background:#fff8f2;border-color:#ffd9bd;box-shadow:0 10px 24px rgba(232,114,44,.16)}
+  .sk-practice .sk-icon,.sk-practice .sk-ratio{background:linear-gradient(135deg,#f59250,#d9601a)}
+  .sk-practice .sk-name{color:#c1440e}
+  .sk-exam .sk-icon,.sk-exam .sk-ratio{background:#6a1b9a}
+  .slk-note{margin-top:20px;background:#f6f8ff;border-left:4px solid #e8722c;border-radius:0 12px 12px 0;padding:15px 18px;font-size:.85em;color:#4a5570;line-height:1.85}
+  .slk-note b{color:#c1440e}
+  .slk-note .nt-t{font-weight:800;color:#1a237e;display:block;margin-bottom:4px}
+
+  @media(max-width:640px){
+    .flow-sec,.mile-sec,.tool-sec,.slk-sec{padding:20px 16px}
+  }
+
+  /* ── Timeline ── */
+  .timeline{
+    background:#fff;border-radius:16px;padding:26px 28px;
+    box-shadow:var(--shadow);margin-bottom:40px;overflow-x:auto
+  }
+  .tl-track{display:flex;align-items:stretch;min-width:760px}
+  .tl-week{flex:1;position:relative}
+  .tl-week+.tl-week::before{
+    content:'';position:absolute;left:0;top:18px;width:1px;height:20px;background:#e0e0e0
+  }
+  .tl-bar{
+    height:38px;border-radius:6px;margin:0 4px;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:.78em;font-weight:700;letter-spacing:.5px;
+    cursor:default;transition:filter .2s,transform .2s
+  }
+  .tl-bar:hover{filter:brightness(1.12);transform:translateY(-2px)}
+  .tl-label{text-align:center;font-size:.75em;color:#6b7285;margin-top:8px;padding:0 4px;line-height:1.4}
+  .tl-days{text-align:center;font-size:.7em;color:#b3b8c6;margin-top:3px}
+
+  /* ── Week Block ── */
+  .week-block{
+    background:#fff;border-radius:16px;overflow:hidden;
+    box-shadow:var(--shadow);margin-bottom:18px;
+    transition:box-shadow .2s;scroll-margin-top:70px
+  }
+  .week-block:hover{box-shadow:var(--shadow-lg)}
+  .week-block.flash{box-shadow:0 0 0 3px rgba(57,73,171,.35)}
+
+  .week-header-btn{
+    width:100%;border:none;color:#fff;
+    background:linear-gradient(135deg,var(--wc) 0%,rgba(0,0,0,.28) 130%);
+    padding:18px 26px;text-align:left;cursor:pointer;
+    display:flex;align-items:center;gap:14px;
+    font-family:inherit;position:relative;overflow:hidden
+  }
+  .week-header-btn::after{
+    content:var(--wemoji);position:absolute;right:64px;top:50%;transform:translateY(-50%);
+    font-size:2.6em;opacity:.16;pointer-events:none
+  }
+  .week-header-left{display:flex;align-items:center;gap:16px;min-width:0}
+  .week-num-badge{
+    background:rgba(255,255,255,.24);border-radius:8px;
+    padding:5px 12px;font-size:.76em;font-weight:800;letter-spacing:1px;white-space:nowrap
+  }
+  .week-title{font-size:1.08em;font-weight:700;letter-spacing:.5px}
+  .week-days-info{font-size:.82em;opacity:.82;margin-top:3px}
+  .week-prog{
+    margin-left:auto;background:rgba(255,255,255,.22);
+    border:1px solid rgba(255,255,255,.3);border-radius:20px;
+    padding:4px 12px;font-size:.76em;font-weight:700;white-space:nowrap
+  }
+  .week-chevron{
+    font-size:1.1em;transition:transform .3s;flex-shrink:0;
+    background:rgba(255,255,255,.2);border-radius:50%;
+    width:30px;height:30px;display:flex;align-items:center;justify-content:center
+  }
+  .week-block.open .week-chevron{transform:rotate(180deg)}
+
+  .week-body{display:none;border-top:1px solid rgba(0,0,0,.05)}
+  .week-block.open .week-body{display:block}
+
+  /* ── Days Grid（卡片式） ── */
+  .days-grid{
+    display:grid;grid-template-columns:repeat(7,1fr);
+    gap:12px;padding:16px;background:#fbfcff
+  }
+  .day-col{
+    background:#fff;border:1.5px solid var(--line);border-radius:14px;
+    padding:14px 12px 16px;transition:.2s;position:relative
+  }
+  .day-col:hover{
+    border-color:var(--wc);transform:translateY(-3px);
+    box-shadow:0 8px 22px rgba(26,35,126,.12)
+  }
+  .day-col.done{background:#f4fbf6;border-color:#bfe3cc}
+  .day-col.done::after{
+    content:'✓';position:absolute;top:-8px;right:-8px;
+    width:24px;height:24px;border-radius:50%;background:#2e7d32;color:#fff;
+    font-size:.8em;font-weight:800;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 3px 8px rgba(46,125,50,.35)
+  }
+  .day-col.hide{display:none}
+
+  .day-num{
+    font-size:.72em;font-weight:800;color:#fff;
+    background:var(--wc);border-radius:6px;
+    display:inline-block;padding:3px 9px;margin-bottom:9px;letter-spacing:.5px
+  }
+  .day-num.special{background:linear-gradient(135deg,#ff6f00,#e65100)}
+  .day-num.exam{background:linear-gradient(135deg,#6a1b9a,#4a148c)}
+
+  .day-topic{
+    font-size:.79em;font-weight:700;color:#333;
+    line-height:1.45;margin-bottom:11px;min-height:2.9em
+  }
+
+  /* ── Day 卡阶段标签 ── */
+  .flow-tag{display:inline-block;font-size:.62em;font-weight:800;border-radius:5px;padding:2px 7px;margin-bottom:7px;letter-spacing:.3px}
+  .flow-tag.std{background:#e8effb;color:#2c5aa0}
+  .flow-tag.teach{background:#e4f3ec;color:#2e7d5b}
+  .flow-tag.check{background:#fdf1dd;color:#c47f17}
+  .flow-tag.opt{background:#f2e9f8;color:#8e44ad}
+  .day-links{display:flex;flex-direction:column;gap:6px}
+  .day-link{
+    display:flex;align-items:center;gap:5px;
+    padding:7px 10px;border-radius:8px;font-size:.75em;
+    font-weight:600;transition:all .15s;white-space:nowrap
+  }
+  .day-link.learn{background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9}
+  .day-link.learn:hover{background:#c8e6c9;color:#1b5e20}
+  .day-link.learn.visited{background:#2e7d32;color:#fff;border-color:#2e7d32}
+  .day-link.quiz{background:#e3f2fd;color:#1565c0;border:1px solid #bbdefb}
+  .day-link.quiz:hover{background:#bbdefb;color:#0d47a1}
+  .day-link.quiz.visited{background:#1565c0;color:#fff;border-color:#1565c0}
+  .day-link.exam-link{background:#f3e5f5;color:#6a1b9a;border:1px solid #e1bee7}
+  .day-link.exam-link:hover{background:#e1bee7;color:#4a148c}
+  .day-link.exam-link.visited{background:#6a1b9a;color:#fff;border-color:#6a1b9a}
+
+  /* week color vars */
+  .w1{--wc:#e91e63;--wemoji:'🌱'}
+  .w2{--wc:#9c27b0;--wemoji:'🔬'}
+  .w3{--wc:#3949ab;--wemoji:'🔧'}
+  .w4{--wc:#764ba2;--wemoji:'💬'}
+  .w5{--wc:#00897b;--wemoji:'🏪'}
+  .w6{--wc:#0277bd;--wemoji:'🎯'}
+  .w7{--wc:#e65100;--wemoji:'🚀'}
+  .w8{--wc:#6a1b9a;--wemoji:'🏆'}
+
+  /* ── 空结果提示 ── */
+  .no-result{
+    display:none;background:#fff;border:1px dashed #cfd6ea;border-radius:14px;
+    padding:26px;text-align:center;color:var(--muted);font-size:.92em;margin-bottom:20px
+  }
+  .no-result.show{display:block}
+
+  /* ── Tip Box ── */
+  .tip-box{
+    background:linear-gradient(135deg,#1565c0,#283593);
+    color:#fff;border-radius:16px;padding:26px 30px;margin-top:40px;
+    display:flex;gap:20px;align-items:flex-start;
+    box-shadow:0 6px 24px rgba(21,101,192,.25)
+  }
+  .tip-box .icon{font-size:2.2em;flex-shrink:0;margin-top:2px}
+  .tip-box h3{margin:0 0 10px;font-size:1.08em;font-weight:700}
+  .tip-box p{margin:0;opacity:.92;font-size:.92em;line-height:1.85}
+
+  /* ── 回到顶部 ── */
+  .to-top{
+    position:fixed;right:22px;bottom:26px;z-index:70;
+    width:46px;height:46px;border:none;border-radius:50%;cursor:pointer;
+    background:linear-gradient(135deg,#3949ab,#1a237e);color:#fff;font-size:1.1em;
+    box-shadow:0 6px 18px rgba(26,35,126,.35);
+    opacity:0;pointer-events:none;transition:.25s
+  }
+  .to-top.show{opacity:1;pointer-events:auto}
+  .to-top:hover{transform:translateY(-3px)}
+
+  /* ── Footer ── */
+  footer{
+    text-align:center;padding:30px 20px;color:#9aa0b4;font-size:.85em;
+    border-top:1px solid var(--line);background:#fff;margin-top:24px
+  }
+  footer strong{color:var(--brand2)}
+
+  /* ══════════════ 响应式（放在最后，覆盖上面的通用折叠规则） ══════════════ */
+  @media(max-width:1100px){
+    .container{padding:30px 24px}
+    .hero{padding:44px 26px 38px}
+    .hero h1{font-size:2.2em}
+  }
+  @media(max-width:900px){
+    body{font-size:15px}
+    .container{padding:22px 16px}
+    .tip-box{flex-direction:column;gap:12px}
+    .timeline{padding:20px 18px}
+    .slk-grid{gap:8px}
+    .slk-card{padding:12px 11px}
+    .slk-card .sk-name{font-size:.92em}
+    .slk-card .sk-desc{font-size:.76em}
+    .slk-card .sk-list{font-size:.74em}
+    .slk-card .sk-sub{font-size:.7em}
+  }
+  @media(max-width:600px){
+    .hero{padding:34px 18px 30px}
+    .hero h1{font-size:1.7em;letter-spacing:1px}
+    .hero .subtitle{font-size:.95em}
+    .badge{font-size:.78em;padding:6px 13px}
+    .container{padding:18px 12px}
+    .slk-seg{padding:10px 4px}
+    .slk-seg .sg-name{font-size:.74em;letter-spacing:1px}
+    .slk-seg .sg-pct{font-size:1.32em}
+    .slk-seg .sg-hint{font-size:.6em}
+    .slk-sec{padding:18px 12px}
+    .slk-grid{gap:6px}
+    .slk-card{padding:10px 8px}
+    .slk-card .sk-head{gap:5px;margin-bottom:7px}
+    .slk-card .sk-icon{width:26px;height:26px;font-size:.85em}
+    .slk-card .sk-name{font-size:.82em}
+    .slk-card .sk-ratio{font-size:.62em;padding:2px 6px;white-space:normal;text-align:center;line-height:1.3}
+    .slk-card .sk-sub{font-size:.64em}
+    .slk-card .sk-desc{font-size:.7em}
+    .slk-card .sk-list{font-size:.68em;line-height:1.65}
+    .slk-card .sk-list li{padding-left:11px}
+  }
+
+  /* 每周 7 天：固定一行 7 列 */
+  .days-grid{grid-template-columns:repeat(7,1fr)!important}
+  /* 统计卡：始终保持一行 4 列 */
+  .stats-grid{grid-template-columns:repeat(4,1fr)!important}
+  /* 四大流程体系 / 培训路径里程碑：固定一行 4 列 */
+  .flow-four,.mile-grid{grid-template-columns:repeat(4,1fr)!important}
+  /* 配套工具清单：固定 3 行 3 列 */
+  .tool-grid{grid-template-columns:repeat(3,1fr)!important}
+  /* 门店标准手册：固定 3 列 */
+  .wf-grid{grid-template-columns:repeat(3,1fr)!important}
+
+  @media(max-width:1150px){
+    .days-grid{gap:8px!important;padding:12px!important}
+    .day-col{padding:12px 8px 14px}
+    .day-topic{font-size:.75em;margin-bottom:9px}
+    .day-link{font-size:.7em;padding:6px 7px;justify-content:center}
+    .flow-four,.mile-grid,.tool-grid,.wf-grid{gap:8px!important}
+    .flow-card,.mile-card,.tool-item{padding:13px 12px}
+    .wf-item{padding:12px 13px}
+  }
+  @media(max-width:900px){
+    .days-grid{gap:6px!important;padding:10px!important}
+    .day-col{padding:10px 6px 12px;border-radius:12px}
+    .day-col.done::after{width:20px;height:20px;top:-6px;right:-6px;font-size:.72em}
+    .day-num{font-size:.66em;padding:3px 7px;margin-bottom:7px}
+    .day-topic{font-size:.7em;line-height:1.4;min-height:0;margin-bottom:8px}
+    .day-link{font-size:.64em;padding:5px 5px;gap:3px;justify-content:center;overflow:hidden}
+    .stats-grid{gap:10px}
+    .stat-card{padding:18px 10px;border-radius:14px}
+    .stat-number{font-size:2.1em}
+    .stat-label{font-size:.78em;letter-spacing:0}
+    .stat-card::after{font-size:2.2em;right:8px}
+  }
+  @media(max-width:640px){
+    .days-grid{gap:4px!important;padding:8px!important}
+    .day-col{padding:8px 4px 10px}
+    .day-num{font-size:.6em;padding:2px 5px;margin-bottom:6px}
+    .day-topic{font-size:.64em;margin-bottom:7px}
+    .day-link{font-size:.58em;padding:4px 3px;gap:2px}
+    .stats-grid{gap:8px}
+    .stat-card{padding:14px 6px}
+    .stat-number{font-size:1.75em}
+    .stat-label{font-size:.7em}
+    .stat-card::after{font-size:1.8em;right:4px;bottom:4px}
+  }
+  /* 极窄屏兜底：7 列 / 4 列 / 3 列太挤时降为 2 列 */
+  @media(max-width:430px){
+    .days-grid{grid-template-columns:repeat(2,1fr)!important;gap:10px!important}
+    .stats-grid{grid-template-columns:repeat(2,1fr)!important}
+    .flow-four,.mile-grid,.tool-grid,.wf-grid{grid-template-columns:repeat(2,1fr)!important;gap:10px!important}
+    .day-topic{font-size:.78em}
+    .day-link{font-size:.75em;padding:6px 8px}
+  }
+
+/* ═══════ 红米12.1寸平板适配（横屏≈1280px ｜ 竖屏≈800px）═══════ */
+@media (min-width:901px) and (max-width:1400px){
+  body{font-size:16px}
+  .header{padding:34px 28px!important}
+  .header h1{font-size:1.8em!important}
+  img{max-width:100%;height:auto}
+  table{max-width:100%}
+}
+@media (max-width:900px){
+  body{font-size:15px;overflow-x:hidden}
+  .container{max-width:100%!important;padding:18px 14px!important;margin:16px auto!important}
+  .header{padding:24px 16px!important}
+  .header h1{font-size:1.45em!important;line-height:1.35!important}
+  .header .subtitle,.header .day-tag,.header .week-badge{font-size:13px!important}
+  h2{font-size:1.2em!important}
+  h3{font-size:1.08em!important}
+  .meta-bar{padding:12px 14px!important;gap:14px!important;flex-wrap:wrap!important}
+  .nav-footer,.nav-bar{flex-wrap:wrap!important;gap:10px!important}
+  .nav-btn,.nav-footer a,.nav-bar a{font-size:.9em!important;padding:10px 16px!important;text-align:center!important}
+  table{display:block!important;overflow-x:auto!important;width:max-content!important;min-width:100%!important;-webkit-overflow-scrolling:touch}
+  img,svg,video{max-width:100%!important}
+  p,li,td,th{overflow-wrap:break-word}
+  [class*="-row"]:not(.nav-footer):not(.nav-bar),[class*="-cards"],[class*="-list"]{flex-wrap:wrap!important}
+}
+@media (max-width:600px){
+  .container{padding:14px 10px!important}
+  .header h1{font-size:1.25em!important}
+}
+
+/*@@ HOME-HERO-UNIFY @@*/
+/* ═══════ 标题框(Hero)与正文框等宽 · 与日期页统一 1300px ═══════
+   横屏≈1280px → 1300px；竖屏≤900px → 自适应留白 16px */
+.hero{
+  width:min(1300px,calc(100% - 32px))!important;max-width:1300px!important;
+  margin:16px auto 0!important;
+  padding:44px 36px 38px!important;
+  border-radius:16px!important;
+  box-shadow:0 8px 26px rgba(21,101,192,.18)!important;
+}
+.container{
+  width:min(1300px,calc(100% - 32px))!important;max-width:1300px!important;
+  margin-left:auto!important;margin-right:auto!important;
+  padding-left:0!important;padding-right:0!important;
+}
+@media(max-width:900px){
+  .hero{padding:30px 20px 26px!important;margin-top:12px!important;border-radius:14px!important}
+  .container{margin-top:14px!important}
+}
+@media(max-width:600px){
+  .hero{padding:24px 14px 22px!important;border-radius:12px!important}
+}
+
+/*@@ TABLE-FIT @@*/
+/* ═══ 窄屏/竖屏表格自适应屏宽（取消横向滚动，列宽随屏宽收缩、长内容自动换行） ═══ */
+@media(max-width:1100px){
+  table:not(.no-fit){display:table!important;width:100%!important;max-width:100%!important;min-width:0!important;table-layout:auto!important;overflow:visible!important;border-collapse:collapse!important}
+  table:not(.no-fit) th,table:not(.no-fit) td{overflow-wrap:break-word!important;word-break:break-word!important}
+}
+@media(max-width:900px){
+  table:not(.no-fit) th,table:not(.no-fit) td{padding:8px 6px!important;font-size:12px!important;line-height:1.5!important}
+}
+@media(max-width:600px){
+  table:not(.no-fit) th,table:not(.no-fit) td{padding:6px 5px!important;font-size:11px!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── Hero ─── -->
+<div class="hero">
+  <div class="hero-inner">
+    <h1>永州爱眼城新员工8周成才</h1>
+    <p class="subtitle">从零基础到独立上岗的完整成长路径 · 56天系统训练</p>
+    <div class="badge-row">
+      <span class="badge">🔗 四大流程落地体系</span>
+      <span class="badge">📚 56天完整课程</span>
+      <span class="badge">🎯 理论 + 实操</span>
+      <span class="badge">✅ 每日练习 + 落地衔接</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ─── 培训体系总纲：四大流程 ─── -->
+  <div class="flow-sec">
+    <div class="section-title" style="margin-top:0">
+      <div class="icon-circle">🔗</div>
+      培训落地总纲 — 四大流程体系
+    </div>
+    <p class="flow-intro">整套 8 周课程，按连锁门店「<strong>标准—带教—考核—优化</strong>」四大流程设计。每一份每日学习材料都标注了它对应的<strong>工作站 / 阶段</strong>，并附有「四大流程落地衔接」模块，直接对接门店的带教、考核与复盘。<br><strong>标准</strong>解决“教什么”，<strong>带教</strong>解决“怎么教”，<strong>考核</strong>解决“是否达标”，<strong>优化</strong>解决“如何越做越好”——四步闭环，循环升级。</p>
+    <div class="flow-four">
+      <div class="flow-card fc1">
+        <div class="fc-step">01</div>
+        <div class="fc-tag">教什么</div>
+        <div class="fc-title">📘 标准</div>
+        <div class="fc-one">把经验变教材</div>
+        <div class="fc-body">为每个工作站固化操作规范
+          <b>课程对应</b>第 1–3 周：文化与制度、光学产品、专业技能，全部拆解为可观察、可考核的标准。</div>
+      </div>
+      <div class="flow-card fc2">
+        <div class="fc-step">02</div>
+        <div class="fc-tag">怎么教</div>
+        <div class="fc-title">🤝 带教</div>
+        <div class="fc-one">把教材变能力</div>
+        <div class="fc-body">认证训练员按四步带教法施教
+          <b>课程对应</b>第 5 周实战跟岗、第 7 周综合提升，由训练员/验光师一对一带教。</div>
+      </div>
+      <div class="flow-card fc3">
+        <div class="fc-step">03</div>
+        <div class="fc-tag">是否达标</div>
+        <div class="fc-title">📊 考核</div>
+        <div class="fc-one">把能力变数据</div>
+        <div class="fc-body">用统一尺子检验能力
+          <b>课程对应</b>每周周测 + Day 28 中期考核 + Day 56 结业考核，结果关系转正与晋级。</div>
+      </div>
+      <div class="flow-card fc4">
+        <div class="fc-step">04</div>
+        <div class="fc-tag">持续迭代</div>
+        <div class="fc-title">🔄 优化</div>
+        <div class="fc-one">把数据变标准</div>
+        <div class="fc-body">实战数据回流修订标准
+          <b>课程对应</b>每日材料末的落地衔接模块 + 每周复盘，把客诉、QSC、考核数据变成改进项。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 培训路径与里程碑 ─── -->
+  <div class="mile-sec">
+    <div class="section-title" style="margin-top:0">
+      <div class="icon-circle">📍</div>
+      新员工培训路径与里程碑
+    </div>
+    <div class="mile-grid">
+      <div class="mile-card">
+        <div class="mc-day">首日 · Day 01</div>
+        <div class="mc-name">融入与认知</div>
+        <div class="mc-txt">完成入职手续、熟悉门店环境、认识团队、分配训练员、明确带教计划。里程碑：入职确认签字。</div>
+      </div>
+      <div class="mile-card">
+        <div class="mc-day">首周 · Day 01–07</div>
+        <div class="mc-name">基础入门</div>
+        <div class="mc-txt">学迎宾接待、基础产品知识、门店动线，跟随训练员观察。里程碑：Day 07 周测合格，方可进入下一阶段。</div>
+      </div>
+      <div class="mile-card">
+        <div class="mc-day">首月 · Day 08–28</div>
+        <div class="mc-name">独立上岗</div>
+        <div class="mc-txt">系统学习各工作站，完成验光接待、选镜配镜、收银结算等核心流程。里程碑：Day 28 中期考核 ≥ 85 分。</div>
+      </div>
+      <div class="mile-card">
+        <div class="mc-day">转正 · Day 29–56</div>
+        <div class="mc-name">独立与结业</div>
+        <div class="mc-txt">跟岗实战、独立接单、综合提升，最终通过 Day 56 结业考核。里程碑：结业考核合格，准予转正。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 学 · 练 · 考 ─── -->
+  <div class="slk-sec">
+    <div class="section-title" style="margin-top:0">
+      <div class="icon-circle">🎯</div>
+      学 · 练 · 考 — 以练为主的能力结构
+    </div>
+    <p class="slk-intro">这套课程不靠"听会"，靠"练会"。56 天的学习时间按 <strong>学 30% : 练 60% : 考 10%</strong> 的比例分配——<strong>练的比重最大</strong>，因为从"知道"到"会做"，中间只隔着一件事：重复动手。学是输入、考是检验，真正决定你能不能独立上岗的，是练。</p>
+
+    <div class="slk-bar">
+      <div class="slk-seg sg-learn">
+        <span class="sg-name">学</span>
+        <span class="sg-pct">30%</span>
+        <span class="sg-hint">看 · 理解</span>
+      </div>
+      <div class="slk-seg sg-practice">
+        <span class="sg-name">练</span>
+        <span class="sg-pct">60%</span>
+        <span class="sg-hint">动手 · 反复</span>
+      </div>
+      <div class="slk-seg sg-exam">
+        <span class="sg-name">考</span>
+        <span class="sg-pct">10%</span>
+        <span class="sg-hint">检验 · 纠偏</span>
+      </div>
+    </div>
+    <div class="slk-scaleline"><span style="flex:30">0%</span><span>50%</span><span style="flex:10;text-align:right">100%</span></div>
+
+    <div class="slk-grid">
+      <div class="slk-card sk-learn">
+        <div class="sk-head">
+          <div class="sk-icon">📖</div>
+          <div class="sk-name">学</div>
+          <div class="sk-ratio">30%</div>
+        </div>
+        <div class="sk-sub">每天约 27 分钟 · 输入知识</div>
+        <div class="sk-desc">读当天的「学习内容」，把原理、产品、话术框架和制度标准先弄明白。够用就好，不追求背得多。</div>
+        <ul class="sk-list">
+          <li>每日 1 份学习内容 </li>
+          <li>光学原理 · 产品知识 · 制度标准 · 话术框架</li>
+          <li>边看边勾重点，看完立刻进入练</li>
+        </ul>
+      </div>
+
+      <div class="slk-card sk-practice">
+        <div class="sk-head">
+          <div class="sk-icon">🛠️</div>
+          <div class="sk-name">练</div>
+          <div class="sk-ratio">60% · 练为主</div>
+        </div>
+        <div class="sk-sub">每天约 54 分钟 · 全课重心</div>
+        <div class="sk-desc">占全部学习时间的六成，是这套课程真正的重心。做题、对练、上手操作，把"看懂"变成"做得出"。</div>
+        <ul class="sk-list">
+          <li>每日「练习题」：选择自动评分 + 填空/问答对答案</li>
+          <li>当天动手实践任务：话术演练、验光协助、镜架调整、开单收银</li>
+          <li>第 5–6 周跟岗实战与独立接单，在真实客流中反复练</li>
+          <li>每份材料末尾「四大流程落地衔接」指引练什么、练到什么标准</li>
+        </ul>
+      </div>
+
+      <div class="slk-card sk-exam">
+        <div class="sk-head">
+          <div class="sk-icon">📝</div>
+          <div class="sk-name">考</div>
+          <div class="sk-ratio">10%</div>
+        </div>
+        <div class="sk-sub">每周 + 2 次阶段性 · 检验纠偏</div>
+        <div class="sk-desc">考不是终点，而是"体检查漏"——把没练到位的地方找出来，再送回练里补。</div>
+        <ul class="sk-list">
+          <li>每周日测：每 7 天一次周测卷，当周内容现场检验</li>
+          <li>中期考核 Day 28 · 结业考核 Day 56</li>
+          <li>结业应知应会表：五档自评，自动列出薄弱项</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="slk-note">
+      <span class="nt-t">📌 为什么"练"要占六成？</span>
+      《四大流程体系》里，"带教"和"考核"环节都建立在"练"之上：讲一遍只能记住 10%，自己动手做一遍能记住 70%。所以每天的安排都是<b>先学 30% 打底 → 再用 60% 反复练 → 最后用 10% 考出来</b>。练得越多，结业考核越轻松；练得越少，考场上越容易卡壳。
+    </div>
+  </div>
+
+  <!-- ─── 课程导航（每周展开，每天直连）─── -->
+  <div class="section-title">
+    <div class="icon-circle">📅</div>
+    每日课程导航 — 点击周标题展开
+  </div>
+
+  <div class="course-toolbar">
+    <div class="tb-search">
+      <input id="searchInput" type="text" placeholder="搜索课程主题，如：镜片 / 投诉 / 考核 / Day 28">
+    </div>
+    <div class="tb-actions">
+      <button class="tb-btn" id="expandAll" type="button">⇩ 全部展开</button>
+      <button class="tb-btn" id="collapseAll" type="button">⇧ 全部收起</button>
+      <label class="tb-switch"><input type="checkbox" id="hideDone"> 隐藏已完成</label>
+      <button class="tb-btn" id="resetBtn" type="button">⟲ 清除记录</button>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:#2e7d32"></i>学习内容</span>
+    <span><i style="background:#1565c0"></i>练习题</span>
+    <span><i style="background:#6a1b9a"></i>考核 / 周测</span>
+    <span><i style="background:#2e7d32;opacity:.35"></i>深底色 = 已学习</span>
+  </div>
+
+  <div class="no-result" id="noResult">😕 没有匹配的课程，换个关键词试试</div>
+
+  <!-- ══════ 第1周 ══════ -->
+  <div class="week-block w1" id="w1">
+    <button class="week-header-btn" onclick="toggleWeek('w1')">
+      <div class="week-header-left">
+        <span class="week-num-badge">WEEK 01</span>
+        <div>
+          <div class="week-title">🌱 文化与制度启蒙</div>
+          <div class="week-days-info">Day 01–07 · 企业文化、职业素养、制度规范、岗位职责</div>
+        </div>
+      </div>
+      <span class="week-chevron">▼</span>
+    </button>
+    <div class="week-body">
+      <div class="days-grid">
+        <div class="day-col">
+          <div class="day-num">Day 01</div>
+          <div class="day-topic">欢迎加入 · 企业文化与使命愿景</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第1周_文化与制度启蒙/Day_01_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第1周_文化与制度启蒙/Day_01_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 02</div>
+          <div class="day-topic">职业形象与服务理念</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第1周_文化与制度启蒙/Day_02_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第1周_文化与制度启蒙/Day_02_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 03</div>
+          <div class="day-topic">考勤制度与薪酬福利</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第1周_文化与制度启蒙/Day_03_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第1周_文化与制度启蒙/Day_03_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 04</div>
+          <div class="day-topic">行为规范与职场礼仪</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第1周_文化与制度启蒙/Day_04_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第1周_文化与制度启蒙/Day_04_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 05</div>
+          <div class="day-topic">奖惩制度与安全规定</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第1周_文化与制度启蒙/Day_05_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第1周_文化与制度启蒙/Day_05_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 06</div>
+          <div class="day-topic">岗位职责与工作流程初识</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第1周_文化与制度启蒙/Day_06_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第1周_文化与制度启蒙/Day_06_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num special">Day 07</div>
+          <div class="flow-tag check">考核节点</div>
+          <div class="day-topic">📋 第1周总结复盘 · 周测</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第1周_文化与制度启蒙/Day_07_学习内容.html">📋 总结复盘</a>
+            <a class="day-link quiz" href="第1周_文化与制度启蒙/Day_07_周测卷.html">📝 周测卷</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ 第2周 ══════ -->
+  <div class="week-block w2" id="w2">
+    <button class="week-header-btn" onclick="toggleWeek('w2')">
+      <div class="week-header-left">
+        <span class="week-num-badge">WEEK 02</span>
+        <div>
+          <div class="week-title">🔬 光学与产品知识</div>
+          <div class="week-days-info">Day 08–14 · 眼睛结构、镜架镜片、处方解读、品牌陈列</div>
+        </div>
+      </div>
+      <span class="week-chevron">▼</span>
+    </button>
+    <div class="week-body">
+      <div class="days-grid">
+        <div class="day-col">
+          <div class="day-num">Day 08</div>
+          <div class="day-topic">眼睛的结构与视觉原理</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第2周_光学与产品知识/Day_08_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第2周_光学与产品知识/Day_08_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 09</div>
+          <div class="day-topic">镜架基础知识</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第2周_光学与产品知识/Day_09_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第2周_光学与产品知识/Day_09_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 10</div>
+          <div class="day-topic">镜片材质与折射率</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第2周_光学与产品知识/Day_10_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第2周_光学与产品知识/Day_10_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 11</div>
+          <div class="day-topic">功能性镜片全解析</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第2周_光学与产品知识/Day_11_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第2周_光学与产品知识/Day_11_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 12</div>
+          <div class="day-topic">验光处方解读与产品搭配</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第2周_光学与产品知识/Day_12_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第2周_光学与产品知识/Day_12_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 13</div>
+          <div class="day-topic">品牌知识与产品陈列</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第2周_光学与产品知识/Day_13_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第2周_光学与产品知识/Day_13_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num special">Day 14</div>
+          <div class="flow-tag check">考核节点</div>
+          <div class="day-topic">📋 第2周总结复盘 · 周测</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第2周_光学与产品知识/Day_14_学习内容.html">📋 总结复盘</a>
+            <a class="day-link quiz" href="第2周_光学与产品知识/Day_14_周测卷.html">📝 周测卷</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ 第3周 ══════ -->
+  <div class="week-block w3" id="w3">
+    <button class="week-header-btn" onclick="toggleWeek('w3')">
+      <div class="week-header-left">
+        <span class="week-num-badge">WEEK 03</span>
+        <div>
+          <div class="week-title">🔧 专业技能训练</div>
+          <div class="week-days-info">Day 15–21 · 验光辅助、镜架调整、陈列收银、售后维修</div>
+        </div>
+      </div>
+      <span class="week-chevron">▼</span>
+    </button>
+    <div class="week-body">
+      <div class="days-grid">
+        <div class="day-col">
+          <div class="day-num">Day 15</div>
+          <div class="day-topic">验光辅助操作入门</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第3周_专业技能训练/Day_15_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第3周_专业技能训练/Day_15_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 16</div>
+          <div class="day-topic">镜架调整与整形技术</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第3周_专业技能训练/Day_16_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第3周_专业技能训练/Day_16_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 17</div>
+          <div class="day-topic">商品陈列与货区管理</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第3周_专业技能训练/Day_17_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第3周_专业技能训练/Day_17_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 18</div>
+          <div class="day-topic">收银操作与库存管理</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第3周_专业技能训练/Day_18_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第3周_专业技能训练/Day_18_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 19</div>
+          <div class="day-topic">售后服务与维修技能</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第3周_专业技能训练/Day_19_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第3周_专业技能训练/Day_19_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 20</div>
+          <div class="day-topic">综合技能实战演练</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第3周_专业技能训练/Day_20_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第3周_专业技能训练/Day_20_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num special">Day 21</div>
+          <div class="flow-tag check">考核节点</div>
+          <div class="day-topic">📋 第3周总结复盘 · 周测</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第3周_专业技能训练/Day_21_学习内容.html">📋 总结复盘</a>
+            <a class="day-link quiz" href="第3周_专业技能训练/Day_21_周测卷.html">📝 周测卷</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ 第4周 ══════ -->
+  <div class="week-block w4" id="w4">
+    <button class="week-header-btn" onclick="toggleWeek('w4')">
+      <div class="week-header-left">
+        <span class="week-num-badge">WEEK 04</span>
+        <div>
+          <div class="week-title">💬 销售话术与中期考核</div>
+          <div class="week-days-info">Day 22–28 · 接待话术、异议处理、连带销售、投诉处理、中期考核</div>
+        </div>
+      </div>
+      <span class="week-chevron">▼</span>
+    </button>
+    <div class="week-body">
+      <div class="days-grid">
+        <div class="day-col">
+          <div class="day-num">Day 22</div>
+          <div class="day-topic">顾客接待与开场话术</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第4周_销售话术与中期考核/Day_22_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第4周_销售话术与中期考核/Day_22_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 23</div>
+          <div class="day-topic">产品介绍话术</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第4周_销售话术与中期考核/Day_23_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第4周_销售话术与中期考核/Day_23_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 24</div>
+          <div class="day-topic">价格异议处理话术</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第4周_销售话术与中期考核/Day_24_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第4周_销售话术与中期考核/Day_24_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 25</div>
+          <div class="day-topic">促成成交话术</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第4周_销售话术与中期考核/Day_25_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第4周_销售话术与中期考核/Day_25_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 26</div>
+          <div class="day-topic">连带销售与会员维护</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第4周_销售话术与中期考核/Day_26_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第4周_销售话术与中期考核/Day_26_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 27</div>
+          <div class="day-topic">投诉处理与危机公关</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第4周_销售话术与中期考核/Day_27_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第4周_销售话术与中期考核/Day_27_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num exam">Day 28</div>
+          <div class="flow-tag check">考核节点</div>
+          <div class="day-topic">📋 第4周总结复盘 · 周测 · 中期考核</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第4周_销售话术与中期考核/Day_28_学习内容.html">📋 总结复盘</a>
+            <a class="day-link quiz" href="第4周_销售话术与中期考核/Day_28_周测卷.html">📝 周测卷</a>
+            <a class="day-link exam-link" href="第4周_销售话术与中期考核/Day_28_中期考核.html">🎓 中期考核</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ 第5周 ══════ -->
+  <div class="week-block w5" id="w5">
+    <button class="week-header-btn" onclick="toggleWeek('w5')">
+      <div class="week-header-left">
+        <span class="week-num-badge">WEEK 05</span>
+        <div>
+          <div class="week-title">🏪 实战跟岗训练</div>
+          <div class="week-days-info">Day 29–35 · 跟岗观摩、需求挖掘、FAB讲解、验光实操、制单交付</div>
+        </div>
+      </div>
+      <span class="week-chevron">▼</span>
+    </button>
+    <div class="week-body">
+      <div class="days-grid">
+        <div class="day-col">
+          <div class="day-num">Day 29</div>
+          <div class="day-topic">跟岗实战：全流程观摩与记录</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第5周_实战跟岗训练/Day_29_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第5周_实战跟岗训练/Day_29_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 30</div>
+          <div class="day-topic">主动问询：需求挖掘实战</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第5周_实战跟岗训练/Day_30_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第5周_实战跟岗训练/Day_30_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 31</div>
+          <div class="day-topic">产品讲解实战：FAB法则</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第5周_实战跟岗训练/Day_31_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第5周_实战跟岗训练/Day_31_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 32</div>
+          <div class="day-topic">验光流程实操：协助接待</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第5周_实战跟岗训练/Day_32_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第5周_实战跟岗训练/Day_32_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 33</div>
+          <div class="day-topic">制单与交付：加工单与取镜流程</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第5周_实战跟岗训练/Day_33_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第5周_实战跟岗训练/Day_33_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 34</div>
+          <div class="day-topic">客诉处理实战：化危为机</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第5周_实战跟岗训练/Day_34_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第5周_实战跟岗训练/Day_34_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num special">Day 35</div>
+          <div class="flow-tag check">考核节点</div>
+          <div class="day-topic">🏆 跟岗总结与成长复盘</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第5周_实战跟岗训练/Day_35_学习内容.html">📋 总结复盘</a>
+            <a class="day-link quiz" href="第5周_实战跟岗训练/Day_35_周测卷.html">📝 周测卷</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ 第6周 ══════ -->
+  <div class="week-block w6" id="w6">
+    <button class="week-header-btn" onclick="toggleWeek('w6')">
+      <div class="week-header-left">
+        <span class="week-num-badge">WEEK 06</span>
+        <div>
+          <div class="week-title">🎯 独立接单训练</div>
+          <div class="week-days-info">Day 36–42 · 标准接待、异议处理、儿童老视、太阳镜、售后维护</div>
+        </div>
+      </div>
+      <span class="week-chevron">▼</span>
+    </button>
+    <div class="week-body">
+      <div class="days-grid">
+        <div class="day-col">
+          <div class="day-num">Day 36</div>
+          <div class="day-topic">独立接单：标准接待流程</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第6周_独立接单训练/Day_36_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第6周_独立接单训练/Day_36_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 37</div>
+          <div class="day-topic">价格异议处理与成交技巧</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第6周_独立接单训练/Day_37_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第6周_独立接单训练/Day_37_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 38</div>
+          <div class="day-topic">儿童配镜专项服务</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第6周_独立接单训练/Day_38_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第6周_独立接单训练/Day_38_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 39</div>
+          <div class="day-topic">老视配镜与中老年服务</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第6周_独立接单训练/Day_39_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第6周_独立接单训练/Day_39_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 40</div>
+          <div class="day-topic">太阳镜与功能性眼镜销售</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第6周_独立接单训练/Day_40_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第6周_独立接单训练/Day_40_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 41</div>
+          <div class="day-topic">售后服务与客户维护</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第6周_独立接单训练/Day_41_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第6周_独立接单训练/Day_41_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num special">Day 42</div>
+          <div class="flow-tag check">考核节点</div>
+          <div class="day-topic">🏆 第6周总结与接单能力评估</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第6周_独立接单训练/Day_42_学习内容.html">📋 总结复盘</a>
+            <a class="day-link quiz" href="第6周_独立接单训练/Day_42_周测卷.html">📝 周测卷</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ 第7周 ══════ -->
+  <div class="week-block w7" id="w7">
+    <button class="week-header-btn" onclick="toggleWeek('w7')">
+      <div class="week-header-left">
+        <span class="week-num-badge">WEEK 07</span>
+        <div>
+          <div class="week-title">🚀 综合提升训练</div>
+          <div class="week-days-info">Day 43–49 · 主觉验光、高端品牌、数据管理、顾客心理、营销策划</div>
+        </div>
+      </div>
+      <span class="week-chevron">▼</span>
+    </button>
+    <div class="week-body">
+      <div class="days-grid">
+        <div class="day-col">
+          <div class="day-num">Day 43</div>
+          <div class="day-topic">验光技能深化：主觉验光全流程</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第7周_综合提升训练/Day_43_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第7周_综合提升训练/Day_43_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 44</div>
+          <div class="day-topic">高端产品知识与品牌销售</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第7周_综合提升训练/Day_44_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第7周_综合提升训练/Day_44_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 45</div>
+          <div class="day-topic">店面数据管理与业绩分析</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第7周_综合提升训练/Day_45_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第7周_综合提升训练/Day_45_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 46</div>
+          <div class="day-topic">团队协作与门店日常管理</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第7周_综合提升训练/Day_46_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第7周_综合提升训练/Day_46_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 47</div>
+          <div class="day-topic">顾客心理与消费行为分析</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第7周_综合提升训练/Day_47_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第7周_综合提升训练/Day_47_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 48</div>
+          <div class="day-topic">门店营销活动策划与执行</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第7周_综合提升训练/Day_48_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第7周_综合提升训练/Day_48_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num special">Day 49</div>
+          <div class="flow-tag check">考核节点</div>
+          <div class="day-topic">🏆 第7周综合复盘与能力提升</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第7周_综合提升训练/Day_49_学习内容.html">📋 总结复盘</a>
+            <a class="day-link quiz" href="第7周_综合提升训练/Day_49_周测卷.html">📝 周测卷</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ 第8周 ══════ -->
+  <div class="week-block w8" id="w8">
+    <button class="week-header-btn" onclick="toggleWeek('w8')">
+      <div class="week-header-left">
+        <span class="week-num-badge">WEEK 08</span>
+        <div>
+          <div class="week-title">🏆 结业冲刺与毕业考核</div>
+          <div class="week-days-info">Day 50–56 · 全程复盘、综合演练、极端情境、结业模拟、毕业考核</div>
+        </div>
+      </div>
+      <span class="week-chevron">▼</span>
+    </button>
+    <div class="week-body">
+      <div class="days-grid">
+        <div class="day-col">
+          <div class="day-num">Day 50</div>
+          <div class="day-topic">8周成长复盘与全流程回顾</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第8周_结业冲刺与毕业考核/Day_50_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第8周_结业冲刺与毕业考核/Day_50_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 51</div>
+          <div class="day-topic">全流程综合演练</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第8周_结业冲刺与毕业考核/Day_51_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第8周_结业冲刺与毕业考核/Day_51_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 52</div>
+          <div class="day-topic">极端情境挑战与高难度应对</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第8周_结业冲刺与毕业考核/Day_52_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第8周_结业冲刺与毕业考核/Day_52_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 53</div>
+          <div class="day-topic">视光学知识精讲</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第8周_结业冲刺与毕业考核/Day_53_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第8周_结业冲刺与毕业考核/Day_53_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 54</div>
+          <div class="day-topic">销售综合强化与结业前准备</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第8周_结业冲刺与毕业考核/Day_54_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第8周_结业冲刺与毕业考核/Day_54_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num">Day 55</div>
+          <div class="flow-tag check">考核节点</div>
+          <div class="day-topic">结业综合模拟考试</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第8周_结业冲刺与毕业考核/Day_55_学习内容.html">📖 学习内容</a>
+            <a class="day-link quiz" href="第8周_结业冲刺与毕业考核/Day_55_练习题.html">✏️ 练习题</a>
+          </div>
+        </div>
+        <div class="day-col">
+          <div class="day-num exam">Day 56</div>
+          <div class="flow-tag check">考核节点</div>
+          <div class="day-topic">🎓 正式结业考核暨毕业总结</div>
+          <div class="day-links">
+            <a class="day-link learn" href="第8周_结业冲刺与毕业考核/Day_56_学习内容.html">📋 毕业总结</a>
+            <a class="day-link exam-link" href="第8周_结业冲刺与毕业考核/Day_56_周测卷.html">🎓 结业考核卷</a>
+            <a class="day-link quiz" href="第8周_结业冲刺与毕业考核/Day_56_练习题.html">✏️ 自评问卷</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 配套工具清单 ─── -->
+  <div class="tool-sec">
+    <div class="section-title" style="margin-top:0">
+      <div class="icon-circle">🧰</div>
+      配套工具与模板清单
+    </div>
+    <div class="tool-grid">
+      <div class="tool-item"><div class="ti-name">① 岗位训练手册</div><div class="ti-use">承载全部工作站操作标准，是新员工学习的主教材，入职发放、随学随查。<a href="配套工具与模板/模板01_岗位训练手册.html" style="color:#2c5aa0;font-weight:700;text-decoration:underline"> →</a></div></div>
+      <div class="tool-item"><div class="ti-name">② 工作站检查表</div><div class="ti-use">把标准拆成可打勾的检查项，用于新人自检、训练员抽检、值班经理周检（覆盖 8 个工作站）。<a href="配套工具与模板/模板02_工作站检查表.html" style="color:#2c5aa0;font-weight:700;text-decoration:underline"> →</a></div></div>
+      <div class="tool-item"><div class="ti-name">③ 训练员认证标准表</div><div class="ti-use">规范训练员选拔与认证，实操示范+试讲+主管评价，80 分以上持证上岗。<a href="配套工具与模板/模板03_训练员认证标准表.html" style="color:#2c5aa0;font-weight:700;text-decoration:underline">→</a></div></div>
+      <div class="tool-item"><div class="ti-name">④ 实操考核评分表</div><div class="ti-use">统一各工作站考核评分尺度，每次考核逐项打分、考后归档。<a href="配套工具与模板/模板04_实操考核评分表.html" style="color:#2c5aa0;font-weight:700;text-decoration:underline"> →</a></div></div>
+      <div class="tool-item"><div class="ti-name">⑤ 带教计划/记录表</div><div class="ti-use">首日填写计划，每次带教后记录学习内容与掌握程度，作为考核依据。<a href="配套工具与模板/模板05_带教计划记录表.html" style="color:#2c5aa0;font-weight:700;text-decoration:underline"> →</a></div></div>
+      <div class="tool-item"><div class="ti-name">⑥ 培训数据看板</div><div class="ti-use">集中呈现考核通过率、QSC 得分、客诉量等指标，为优化提供数据支撑。<a href="配套工具与模板/模板06_培训数据看板.html" style="color:#2c5aa0;font-weight:700;text-decoration:underline"> →</a></div></div>
+      <div class="tool-item"><div class="ti-name">⑦ 标准修订记录表</div><div class="ti-use">记录每次标准修订的内容、原因与生效时间，确保全员使用最新版。<a href="配套工具与模板/模板07_标准修订记录表.html" style="color:#2c5aa0;font-weight:700;text-decoration:underline"> →</a></div></div>
+      <div class="tool-item"><div class="ti-name">⑧ 新人成长档案</div><div class="ti-use">汇总入职到转正的全部培训与考核记录，一人一档，用于转正与晋升参考。<a href="配套工具与模板/模板08_新人成长档案.html" style="color:#2c5aa0;font-weight:700;text-decoration:underline"> →</a></div></div>
+      <div class="tool-item" style="background:#fff7f0;border:1.5px solid #ffd9bd"><div class="ti-name" style="color:#c1440e">⑨ 结业应知应会表</div><div class="ti-use">把 56 天全部知识点与技能项整理成一张可交互自检表，三档标记掌握程度、自动统计，结业前逐项过关。<a href="新员工结业应知应会表.html" style="color:#c1440e;font-weight:700;text-decoration:underline"> →</a></div></div>
+      <div class="tool-item" style="background:#f0fbf7;border:1.5px solid #bfe8d9"><div class="ti-name" style="color:#0b6e4f">⑩ 技能实操模拟演练安排表</div><div class="ti-use">8 大工作站 + 卖场运营，49 项技能、630+ 次实操演练：每项技能明确演练次数、演练形式（空演/对练/模拟/真岗）与熟练掌握要求，练到过关才上岗。<a href="技能实操模拟演练安排表.html" style="color:#0b6e4f;font-weight:700;text-decoration:underline"> →</a></div></div>
+    </div>
+    <a class="sys-link" href="新员工培训四大流程体系_标准-带教-考核-优化.html">《四大流程体系》</a>
+    <a class="sys-link" style="margin-left:12px;background:linear-gradient(135deg,#3949ab,#1a237e)" href="新员工试用期解除情形与判断标准.html">《试用期解除情形与判断标准》</a>
+  </div>
+
+  <!-- ─── 门店标准手册（工作流程）─── -->
+  <div class="tool-sec wf-sec collapsed" id="wfSec">
+    <div class="wf-head">
+      <div class="section-title" style="margin-top:0">
+        <div class="icon-circle">📘</div>
+        门店标准作业标准流程
+      </div>
+      <button class="wf-toggle" id="wfToggle" type="button" aria-expanded="false" aria-controls="wfBody" onclick="toggleWf()">
+        <span class="wft-arrow">▼</span><span class="wft-text">展开</span>
+      </button>
+    </div>
+    <div class="wf-body" id="wfBody" hidden>
+    <p class="wf-intro">课程解决"<strong>知道怎么做</strong>"，手册解决"<strong>照着做、做到一致</strong>"。这十本手册对应新员工上岗后每天真正要做的动作，全部来自门店实操沉淀，统一版式、可直接打印上墙；每日课程里学到的知识点，都能在手册中找到可照读的标准动作与标准话术。<br>📌 配合建议：<strong>第 3–4 周</strong>学完专业技能与销售话术后，用《取镜流程》《标准验光流程》《销售服务流程》做对照演练；<strong>第 5–6 周</strong>跟岗与独立接单，用《眼镜调校》《整形细节三十项》反复练手、用《眼镜质检流程与标准》把好交付关；<strong>第 7 周</strong>用《整形技能考核表》逐项自测打分。青少年近视防控相关岗位，请重点学习《青少年复查标准流程》，掌握三阶段复查服务闭环。</p>
+
+    <div class="wf-group">① 顾客服务主流程 <em>柜台 → 验光室 → 交付，全链路三步</em></div>
+    <div class="wf-grid">
+      <a class="wf-item" href="工作流程/销售服务流程.html">
+        <div class="wi-name">销售服务流程</div>
+        <div class="wi-use">12 步骤四阶段：迎宾接待 → 需求探寻 → 处方解读 → 商品推荐 → 异议谈判 → 成交收银 → 送客离店，含标准动作与标准话术。</div>
+        <div class="wi-go">打开手册 →</div>
+      </a>
+      <a class="wf-item" href="工作流程/标准验光流程.html">
+        <div class="wi-name">标准验光流程</div>
+        <div class="wi-use">18 个环节分四阶段：开场与基础检查 → 主觉验光 → 散光精调 → 视力与双眼平衡，含验光三目的、三问句式与关键参数。</div>
+        <div class="wi-go">打开手册 →</div>
+      </a>
+      <a class="wf-item" href="工作流程/取镜流程.html">
+        <div class="wi-name">取镜流程</div>
+        <div class="wi-use">十步标准作业：迎宾接待 → 引座倒水 → 核单取镜 → 成镜检查 → 试戴交接 → 观察微调 → 适度赞美 → 交代注意事项 → 转介绍包装结款 → 礼送离店。</div>
+        <div class="wi-go">打开手册 →</div>
+      </a>
+      <a class="wf-item" href="工作流程/消费者需求探寻表.html">
+        <div class="wi-name">消费者需求探寻表</div>
+        <div class="wi-use">七大类别、十一种场景的探寻话术，可直接照读：结合场景提问、用眼习惯、旧镜问题、年龄与工作场景、犹豫点、价格敏感、家人需求。</div>
+        <div class="wi-go">打开手册 →</div>
+      </a>
+    </div>
+
+    <div class="wf-group">② 眼镜整形与调校 <em>手上真功夫，靠反复练</em></div>
+    <div class="wf-grid">
+      <a class="wf-item" href="工作流程/眼镜调校.html">
+        <div class="wi-name">眼镜调校标准手册</div>
+        <div class="wi-use">A 面（水平/垂直/扭曲）、B 线（镜腿流线/合拢叠线）、C 角度（前弯弧/倾斜角/外张角/脚套弯弧/内切度）、D 点（鼻托服帖）、E 注意七条，五维作业体系。</div>
+        <div class="wi-go">打开手册 →</div>
+      </a>
+      <a class="wf-item" href="工作流程/整形细节30项.html">
+        <div class="wi-name">整形细节三十项</div>
+        <div class="wi-use">三十项实操基本功，按门店使用频次由高到低排列，附五档能力地图；全框 / 半框 / 无框 / 板材全覆盖。第 5–6 周练手主教材。</div>
+        <div class="wi-go">打开手册 →</div>
+      </a>
+      <a class="wf-item" href="工作流程/整形技能考核表.html">
+        <div class="wi-name">整形技能考核表</div>
+        <div class="wi-use">三十项逐项考核表：三档评分标准（优秀/合格/不合格）、分值合计 100 分、考生信息栏 + 评级标准 + 考核说明，可直接打印考核。</div>
+        <div class="wi-go">打开考核表 →</div>
+      </a>
+    </div>
+
+    <div class="wf-group">③ 质量把控与专业输出 <em>把好最后一关，把数据讲明白</em></div>
+    <div class="wf-grid">
+      <a class="wf-item" href="工作流程/眼镜质检流程与标准.html">
+        <div class="wi-name">眼镜质检流程与标准</div>
+        <div class="wi-use">成镜检查四步走：核对 → 外观检测十一项 → 装框数据检测七步 → 按《GB 13511.1-2011》四组允差表判定瞳距、水平互差、垂直互差、散光轴向，不合格立即退回加工区。</div>
+        <div class="wi-go">打开手册 →</div>
+      </a>
+      <a class="wf-item" href="工作流程/七步标准解读SOP.html">
+        <div class="wi-name">七步标准解读 SOP</div>
+        <div class="wi-use">《检查报告解读标准化方案》模块 02：检查数据梳理 → 异常值识别 → 异常原因 → 异常影响 → 解决方案等七步解读法，附通用开场话术与话术模板。</div>
+        <div class="wi-go">打开手册 →</div>
+      </a>
+      <a class="wf-item" href="工作流程/青少年复查标准流程.html">
+        <div class="wi-name">青少年复查标准流程</div>
+        <div class="wi-use">三阶段标准流程：接待与准备（≤5 分钟）→ 专业检查与评估（15–20 分钟）→ 健康咨询与主动闭环（≥10 分钟）。每步配标准操作、话术指引与关键检查点，强制当场完成下次预约。</div>
+        <div class="wi-go">打开手册 →</div>
+      </a>
+    </div>
+    </div><!-- /wf-body -->
+  </div>
+
+  <!-- ─── 学习建议 ─── -->
+  <div class="tip-box" style="margin-top:40px">
+    <div>
+      <h3>学习建议 · 按四大流程走完全程</h3>
+      <p>每天按顺序完成当天的<strong>学习内容</strong>和<strong>练习题</strong>，两者之间可通过底部导航按钮一键切换。学习内容建议早班前或午休时阅读，练习题当天完成。每份学习内容末尾的「<strong>四大流程落地衔接</strong>」模块，会告诉你今天学的知识对应当哪个工作站、怎么带教、怎么考核、如何回流优化——请配合训练员逐项落实。<br>📌 <strong>中期考核（Day 28）</strong>和<strong>结业考核（Day 56）</strong>是阶段性检验，请认真对待，考核结果将作为转正评定的重要参考依据。<br>📕 关于试用期<strong>转正与解除</strong>的具体情形、判断标准与依据（考核不达标、严重违纪、个人意愿离职等），详见 <a href="新员工试用期解除情形与判断标准.html" style="color:#ffd9a8;font-weight:700;text-decoration:underline">《新员工试用期解除情形与判断标准》</a>。</p>
+    </div>
+  </div>
+
+</div>
+
+<button class="to-top" id="toTop" type="button" title="回到顶部">↑</button>
+
+<footer>
+  <strong>永州爱眼城新员工8周成才培训体系 · 闫胜君编撰</strong> &nbsp;|&nbsp; 全套课程 · 共56天 · 108个学习文件
+</footer>
+
+<script>
+(function(){
+  var KEY='eye8w_progress_v1', OPEN_KEY='eye8w_open_v1';
+  var visited={};
+  try{ visited=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ visited={}; }
+  var openWeeks=null;
+  try{ openWeeks=JSON.parse(localStorage.getItem(OPEN_KEY)||'null'); }catch(e){ openWeeks=null; }
+
+  var blocks=[].slice.call(document.querySelectorAll('.week-block'));
+  var searchInput=document.getElementById('searchInput');
+  var hideDone=document.getElementById('hideDone');
+  var noResult=document.getElementById('noResult');
+
+  /* ── 周进度标签 ── */
+  blocks.forEach(function(b){
+    var span=document.createElement('span');
+    span.className='week-prog';
+    b.querySelector('.week-header-btn').insertBefore(span, b.querySelector('.week-chevron'));
+  });
+
+  function dayDone(col){
+    return [].slice.call(col.querySelectorAll('.day-link')).some(function(a){
+      return !!visited[a.getAttribute('href')];
+    });
+  }
+
+  function refresh(){
+    blocks.forEach(function(b,i){
+      var cols=[].slice.call(b.querySelectorAll('.day-col'));
+      var d=0;
+      cols.forEach(function(col){
+        var ok=dayDone(col);
+        col.classList.toggle('done', ok);
+        col.querySelectorAll('.day-link').forEach(function(a){
+          a.classList.toggle('visited', !!visited[a.getAttribute('href')]);
+        });
+        if(ok) d++;
+      });
+      b.querySelector('.week-prog').textContent=d+'/'+cols.length+' 天';
+    });
+    applyFilters();
+  }
+
+  function applyFilters(){
+    var kw=(searchInput.value||'').trim().toLowerCase();
+    var hide=hideDone.checked;
+    var any=false;
+    blocks.forEach(function(b){
+      var shown=0;
+      [].slice.call(b.querySelectorAll('.day-col')).forEach(function(col){
+        var txt=(col.textContent||'').toLowerCase();
+        var ok=(!kw||txt.indexOf(kw)>-1) && !(hide&&col.classList.contains('done'));
+        col.classList.toggle('hide', !ok);
+        if(ok) shown++;
+      });
+      b.style.display=shown?'':'none';
+      if(shown) any=true;
+      if(kw) b.classList.add('open');
+    });
+    noResult.classList.toggle('show', !any);
+  }
+
+  function saveOpen(){
+    var st={};
+    blocks.forEach(function(b){ st[b.id]=b.classList.contains('open'); });
+    try{ localStorage.setItem(OPEN_KEY, JSON.stringify(st)); }catch(e){}
+  }
+
+  /* ── 事件 ── */
+  document.querySelectorAll('.day-link').forEach(function(a){
+    a.addEventListener('click', function(){
+      visited[a.getAttribute('href')]=1;
+      try{ localStorage.setItem(KEY, JSON.stringify(visited)); }catch(e){}
+      refresh();
+    });
+  });
+
+  window.toggleWeek=function(id){
+    document.getElementById(id).classList.toggle('open');
+    saveOpen();
+  };
+  document.getElementById('expandAll').onclick=function(){
+    blocks.forEach(function(b){ b.classList.add('open'); }); saveOpen(); applyFilters();
+  };
+  document.getElementById('collapseAll').onclick=function(){
+    blocks.forEach(function(b){ b.classList.remove('open'); }); saveOpen();
+  };
+  searchInput.addEventListener('input', applyFilters);
+  hideDone.addEventListener('change', applyFilters);
+  document.getElementById('resetBtn').onclick=function(){
+    if(!confirm('确定要清空本机学习进度记录吗？')) return;
+    visited={}; try{ localStorage.removeItem(KEY); }catch(e){}
+    refresh();
+  };
+
+  /* ── 门店标准手册 展开 / 收起 ── */
+  var WF_KEY='eye8w_wf_open_v1';
+  var wfSec=document.getElementById('wfSec');
+  var wfBody=document.getElementById('wfBody');
+  var wfToggle=document.getElementById('wfToggle');
+
+  function wfApply(open, save){
+    wfSec.classList.toggle('collapsed', !open);
+    wfToggle.setAttribute('aria-expanded', open ? 'true':'false');
+    wfToggle.querySelector('.wft-text').textContent = open ? '收起' : '展开';
+    if(open){
+      wfBody.hidden=false;
+      wfBody.style.height='auto';
+    }else{
+      wfBody.style.height=wfBody.scrollHeight+'px';
+      void wfBody.offsetHeight;
+      wfBody.style.height='0px';
+      setTimeout(function(){ if(wfSec.classList.contains('collapsed')) wfBody.hidden=true; }, 340);
+    }
+    if(save){ try{ localStorage.setItem(WF_KEY, open?'1':'0'); }catch(e){} }
+  }
+  window.toggleWf=function(){
+    wfApply(wfSec.classList.contains('collapsed'), true);
+  };
+
+  var wfOpen=false;
+  try{ var sv=localStorage.getItem(WF_KEY); if(sv!==null) wfOpen=(sv==='1'); }catch(e){}
+  wfApply(wfOpen, false);
+
+  var toTop=document.getElementById('toTop');
+  window.addEventListener('scroll', function(){
+    toTop.classList.toggle('show', window.scrollY>420);
+  });
+  toTop.onclick=function(){ window.scrollTo({top:0,behavior:'smooth'}); };
+
+  /* ── 初始状态 ── */
+  if(openWeeks){ blocks.forEach(function(b){ if(openWeeks[b.id]) b.classList.add('open'); }); }
+  else { document.getElementById('w1').classList.add('open'); }
+  refresh();
+})();
+</script>
+</body>
+</html>
