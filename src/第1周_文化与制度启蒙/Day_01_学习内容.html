@@ -1,0 +1,577 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 01 | 欢迎加入 · 行业特性与企业文化</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Microsoft YaHei', Arial, sans-serif; background: #f5f7fa; color: #333; }
+  .header { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); padding: 40px 30px; border-bottom: 3px solid #4CAF50; }
+  .header .day-tag { background: #4CAF50; color: white; display: inline-block; padding: 4px 16px; border-radius: 20px; font-size: 0.85em; margin-bottom: 12px; }
+  .header h1 { font-size: 2em; color: #2e7d32; margin-bottom: 8px; }
+  .header .subtitle { color: #555; font-size: 1em; }
+  .meta-bar { background: white; padding: 14px 30px; display: flex; gap: 30px; border-bottom: 1px solid #eee; flex-wrap: wrap; }
+  .meta-item { display: flex; align-items: center; gap: 8px; font-size: 0.88em; color: #666; }
+  .meta-item strong { color: #333; }
+  .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }  .section { background: white; border-radius: 12px; padding: 28px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+  .section h2 { font-size: 1.3em; color: #2e7d32; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #e8f5e9; }
+  .section h3 { font-size: 1.05em; color: #333; margin: 18px 0 10px; }
+  .section p { line-height: 1.8; color: #555; margin-bottom: 12px; font-size: 0.95em; }
+  .section ul, .section ol { padding-left: 20px; margin-bottom: 14px; }
+  .section li { line-height: 1.8; color: #555; font-size: 0.95em; margin-bottom: 4px; }
+  .highlight-box { background: #fff8e1; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+  .highlight-box .label { color: #F57F17; font-weight: 700; font-size: 0.85em; margin-bottom: 6px; }
+  .value-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0; }
+  .value-card { background: #f5f5f5; border-radius: 10px; padding: 16px; text-align: center; }
+  .value-card .icon { font-size: 1.8em; margin-bottom: 8px; }
+  .value-card .name { font-weight: 700; font-size: 0.95em; color: #333; margin-bottom: 6px; }
+  .value-card .desc { font-size: 0.82em; color: #666; line-height: 1.5; }
+  .story-box { background: #f3e5f5; border-radius: 10px; padding: 20px; margin: 16px 0; }
+  .story-box .story-title { color: #6a1b9a; font-weight: 700; margin-bottom: 10px; }
+  .checklist { background: #f5f5f5; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+  .checklist-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 0.92em; }
+  .checklist-item::before { content: "☐"; color: #4CAF50; font-size: 1.1em; flex-shrink: 0; }
+  .summary-box { background: linear-gradient(135deg, #e8f5e9, #f1f8e9); border-radius: 12px; padding: 24px; margin-top: 30px; }
+  .summary-box h3 { color: #2e7d32; margin-bottom: 14px; }
+  .summary-box ul { padding-left: 18px; }
+  .summary-box li { margin-bottom: 8px; font-size: 0.95em; }
+  .nav-footer { display: flex; justify-content: space-between; margin-top: 30px; margin-bottom: 40px; }
+  .nav-btn { background: #4CAF50; color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-size: 0.9em; }
+  .nav-btn.outline { background: white; color: #4CAF50; border: 2px solid #4CAF50; }
+  @media (max-width: 600px) { .value-cards { grid-template-columns: 1fr; } }
+  .structure-table,.rule-table{width:100%;border-collapse:collapse;margin:14px 0;}
+  .structure-table th,.rule-table th{background:#2196F3;color:white;padding:10px 14px;text-align:center;font-size:0.9em;}
+  .structure-table td,.rule-table td{padding:10px 14px;border-bottom:1px solid #f0f0f0;font-size:0.88em;}
+  .structure-table tr:nth-child(even) td,.rule-table tr:nth-child(even) td{background:#f9f9f9;}
+
+  /* ══════════════════════════════════════════════
+     红米平板响应式适配（横屏1100px / 竖屏900px）
+     ══════════════════════════════════════════════ */
+
+  /* 平板横屏：内容区微调 */
+  @media (max-width: 1100px) {
+    .container { padding: 28px 24px !important; }
+    .days-grid { grid-template-columns: repeat(4,1fr) !important; }
+    .stats-grid { grid-template-columns: repeat(2,1fr) !important; }
+  }
+
+  /* 平板竖屏：核心适配断点 */
+  @media (max-width: 900px) {
+    body { padding: 12px !important; font-size: 15px; }
+    .container { padding: 20px 16px !important; border-radius: 10px !important; }
+    /* 学习内容：各类2列/3列网格折叠为1列 */
+    .value-cards, .material-grid, .face-grid,
+    .norm-grid, .salary-grid, .do-dont, .image-standard,
+    .safety-grid, .role-cards, .review-grid, .equipment-grid,
+    .lens-grid, .coating-grid, .term-grid, .display-rules,
+    .problem-grid, .fabe-grid, .compare-grid, .signal-grid,
+    .review-grid, .zone-grid, .test-info, .method-grid,
+    .question-type, .fab-grid, .form-grid, .wrong-right,
+    .step-grid, .card-grid, .card-row, .grid2, .do-dont,
+    .achieve-grid, .product-card, .sign-area, .wish-cards,
+    .eval-row,
+    [class*="-grid"], [class*="grid-"],
+    .two-col { grid-template-columns: 1fr !important; }
+    /* 3列→2列特殊处理（不完全折叠，保留2列） */
+    .exam-info { grid-template-columns: repeat(2,1fr) !important; }
+    /* 导航按钮：允许换行，防止溢出 */
+    .nav-footer, .nav-bar {
+      flex-wrap: wrap !important;
+      gap: 10px !important;
+    }
+    .nav-btn {
+      font-size: 0.88em !important;
+      padding: 10px 18px !important;
+      text-align: center !important;
+    }
+    /* 标题字号适配 */
+    .header h1, h1 { font-size: 1.4em !important; }
+    .header .subtitle, .header .week-badge { font-size: 13px !important; }
+    /* 表格横向滚动（防溢出） */
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    /* meta-bar 换行 */
+    .meta-bar { padding: 12px 16px !important; gap: 14px !important; flex-wrap: wrap !important; }
+    /* 首页时间轴横向滚动 */
+    .timeline { overflow-x: auto; }
+  }
+
+  /* 手机 / 平板极窄竖屏 */
+  @media (max-width: 600px) {
+    body { padding: 8px !important; }
+    .container { padding: 16px 12px !important; }
+    .header h1, h1 { font-size: 1.2em !important; }
+    .days-grid { grid-template-columns: repeat(2,1fr) !important; }
+    .stats-grid { grid-template-columns: repeat(2,1fr) !important; }
+    .container { padding: 16px !important; }
+  }
+
+/* ═══════ 红米12.1寸平板适配（横屏≈1280px ｜ 竖屏≈800px）═══════ */
+@media (min-width:901px) and (max-width:1400px){
+  .container{max-width:1300px!important;padding:26px 24px!important}
+  body{font-size:16px}
+  .header{padding:34px 28px!important}
+  .header h1{font-size:1.8em!important}
+  img{max-width:100%;height:auto}
+  table{max-width:100%}
+}
+@media (max-width:900px){
+  body{font-size:15px;overflow-x:hidden}
+  .container{max-width:100%!important;padding:18px 14px!important;margin:16px auto!important}
+  .header{padding:24px 16px!important}
+  .header h1{font-size:1.45em!important;line-height:1.35!important}
+  .header .subtitle,.header .day-tag,.header .week-badge{font-size:13px!important}
+  h2{font-size:1.2em!important}
+  h3{font-size:1.08em!important}
+  .meta-bar{padding:12px 14px!important;gap:14px!important;flex-wrap:wrap!important}
+  .nav-footer,.nav-bar{flex-wrap:wrap!important;gap:10px!important}
+  .nav-btn,.nav-footer a,.nav-bar a{font-size:.9em!important;padding:10px 16px!important;text-align:center!important}
+  table{display:block!important;overflow-x:auto!important;width:max-content!important;min-width:100%!important;-webkit-overflow-scrolling:touch}
+  img,svg,video{max-width:100%!important}
+  p,li,td,th{overflow-wrap:break-word}
+  [class*="-row"]:not(.nav-footer):not(.nav-bar),[class*="-cards"],[class*="-list"]{flex-wrap:wrap!important}
+  .value-cards {
+    grid-template-columns:repeat(2,1fr)!important;gap:12px!important
+  }
+}
+@media (max-width:600px){
+  .container{padding:14px 10px!important}
+  .header h1{font-size:1.25em!important}
+  .value-cards {
+    grid-template-columns:1fr!important
+  }
+}
+
+  /* ═══════ 每日学习标准模块（目标 / 实践 / FAQ / 参考 / 自测 / 阶段复盘） ═══════ */
+  .lm-block{border-radius:14px;padding:20px 24px;margin:24px 0;line-height:1.85}
+  .lm-block h3{margin:0 0 14px;font-size:1.1em;font-weight:700;letter-spacing:.3px}
+  .lm-list{margin:0;padding-left:22px}
+  .lm-list li{margin-bottom:9px}
+  .lm-goal{background:#e8f5e9;color:#1b5e20}
+  .lm-goal h3{color:#2e7d32}
+  .lm-practice{background:#fff8e1;color:#4e342e}
+  .lm-practice h3{color:#e65100}
+  .lm-faq{background:#f3e5f5;color:#4a148c}
+  .lm-faq h3{color:#7b1fa2}
+  .lm-ref{background:#e3f2fd;color:#0d3c61}
+  .lm-ref h3{color:#1565c0}
+  .lm-quiz{background:#fce4ec;color:#880e4f}
+  .lm-quiz h3{color:#c2185b}
+  .lm-review{background:#ede7f6;color:#311b92}
+  .lm-review h3{color:#4527a0}
+  .lm-meta{margin:12px 0 0;font-size:.9em;opacity:.92}
+  .lm-pr{margin:0 0 14px;padding:14px 16px;background:rgba(255,255,255,.75);border-radius:10px}
+  .lm-pr:last-child{margin-bottom:0}
+  .lm-pr-t{font-weight:700;margin-bottom:6px}
+  .lm-pr-d{margin-bottom:6px}
+  .lm-pr-o{font-size:.92em;font-weight:600}
+  .lm-q{margin:0 0 10px;padding:10px 14px;background:rgba(255,255,255,.75);border-radius:10px}
+  .lm-q:last-child{margin-bottom:0}
+  .lm-q summary{cursor:pointer;font-weight:600;line-height:1.7}
+  .lm-q[open] summary{margin-bottom:8px}
+  .lm-a{font-size:.95em;color:#212121;line-height:1.8}
+  .lm-a b{color:#c2185b}
+  .lm-faq .lm-a b{color:#7b1fa2}
+  .lm-sub{font-weight:700;margin:14px 0 8px;font-size:1em}
+  @media(max-width:900px){
+    .lm-block{padding:16px 14px;margin:18px 0;line-height:1.75}
+    .lm-block h3{font-size:1.02em}
+    .lm-list{padding-left:18px}
+  }
+
+/* ══ HOME-BAR：顶部返回首页入口 ══ */
+.home-topbar{background:#fff;padding:10px 0}
+.home-topbar .ht-inner{max-width:900px;margin:0 auto;padding:0 30px}
+.home-topbar a{display:inline-flex;align-items:center;gap:6px;font-size:.86em;font-weight:700;color:#4a5270;text-decoration:none;background:#f1f3f9;border-radius:20px;padding:7px 18px;transition:background .2s,color .2s,transform .2s}
+.home-topbar a:hover{background:#e6eaf6;color:#283593;transform:translateX(-2px)}
+@media (min-width:901px) and (max-width:1400px){.home-topbar .ht-inner{max-width:1300px}}
+@media (max-width:900px){.home-topbar{padding:8px 0}.home-topbar .ht-inner{max-width:100%;padding:0 14px}.home-topbar a{font-size:.82em;padding:6px 14px}}
+
+/* ═══════ 四大流程落地衔接模块（增强版） ═══════ */
+  .flow-block{background:#f5f8fd;border:1px solid #dbe6f5;border-radius:14px;padding:24px 26px;margin:26px 0}
+  .flow-block h3{margin:0 0 12px;font-size:1.12em;color:#1a3a6b;font-weight:700}
+  .flow-hook{background:#eaf1fb;border-left:4px solid #2c5aa0;border-radius:8px;padding:13px 16px;margin:0 0 14px;font-size:.93em;color:#2c3e50;line-height:1.75}
+  .flow-hook b{color:#1a3a6b}
+  .flow-sub{margin:0 0 18px;font-size:.9em;color:#556}
+  .flow-sub strong{color:#1a3a6b}
+  .flow-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .flow-col{border-radius:12px;padding:16px 18px;background:#fff;box-shadow:0 1px 4px rgba(26,58,107,.05)}
+  .flow-h{font-weight:800;font-size:.98em;margin-bottom:10px;color:#1a3a6b;display:flex;align-items:center;gap:6px}
+  .flow-h .fh-tag{font-size:.7em;font-weight:700;color:#fff;border-radius:5px;padding:2px 7px;letter-spacing:.5px}
+  .flow-std .flow-h{color:#2c5aa0}.flow-std .fh-tag{background:#2c5aa0}
+  .flow-teach .flow-h{color:#2e7d5b}.flow-teach .fh-tag{background:#2e7d5b}
+  .flow-check .flow-h{color:#c47f17}.flow-check .fh-tag{background:#c47f17}
+  .flow-opt .flow-h{color:#8e44ad}.flow-opt .fh-tag{background:#8e44ad}
+  .flow-say{font-size:.88em;color:#37475e;background:#f6f9ff;border-radius:8px;padding:10px 12px;margin-bottom:12px;line-height:1.7;border-left:3px solid #cdd9ec}
+  .flow-say b{color:#1a3a6b}
+  .flow-do-t{font-size:.82em;font-weight:800;color:#556;margin:12px 0 6px}
+  .flow-do{margin:0;padding-left:19px}
+  .flow-do li{font-size:.85em;line-height:1.7;margin-bottom:6px;color:#4a5568}
+  .flow-standard{font-size:.84em;color:#2e7d32;background:#eef8f0;border-radius:7px;padding:9px 12px;margin-top:12px;line-height:1.65}
+  .flow-standard b{color:#1b5e20}
+  .flow-pit{font-size:.84em;color:#b3541e;background:#fdf3ea;border-radius:7px;padding:9px 12px;margin-top:8px;line-height:1.65}
+  .flow-pit b{color:#8a3d0a}
+  .flow-meta{margin:18px 0 0;font-size:.84em;color:#5a6478;background:#eef3fb;border-radius:8px;padding:12px 16px;line-height:1.7}
+  .flow-meta b{color:#1a3a6b}
+  @media(max-width:900px){
+    .flow-grid{grid-template-columns:1fr;gap:12px}
+    .flow-block{padding:18px 16px}
+    .flow-say,.flow-do li,.flow-standard,.flow-pit{font-size:.86em}
+  }
+/*@@ LAYOUT-UNIFY @@*/
+/* ═══════ 布局统一：标题框 = 内容框等宽 · 红米12.1寸平板完美适配 ═══════
+   横屏≈1280px → 统一 1300px；竖屏≤900px → 自适应留白
+   标题框(.header)与内容框(.container)使用完全相同的宽度规则 */
+.home-topbar .ht-inner{width:min(1300px,calc(100% - 32px))!important;max-width:1300px!important;margin:0 auto!important}
+.header{
+  width:min(1300px,calc(100% - 32px))!important;max-width:1300px!important;
+  margin:18px auto 0!important;padding:34px 30px!important;
+  border:0!important;border-radius:14px!important;
+  box-shadow:0 6px 22px rgba(0,0,0,.08)!important;
+}
+.container{
+  width:min(1300px,calc(100% - 32px))!important;max-width:1300px!important;
+  margin-left:auto!important;margin-right:auto!important;
+  padding-left:0!important;padding-right:0!important;
+}
+@media(max-width:900px){
+  .header{padding:24px 18px!important;margin-top:14px!important;border-radius:12px!important}
+}
+@media(max-width:600px){
+  .header{padding:20px 15px!important}
+}
+/*@@ LAYOUT-UNIFY-2 @@*/
+/* ═══ meta-bar（学习时长/配套练习条）与标题框/内容框同宽 ═══ */
+.meta-bar{
+  width:min(1300px,calc(100% - 32px))!important;max-width:1300px!important;
+  margin:14px auto 0!important;padding:14px 30px!important;
+  border:0!important;border-radius:12px!important;
+  box-shadow:0 4px 14px rgba(0,0,0,.06)!important;
+}
+@media(max-width:900px){
+  .meta-bar{padding:12px 16px!important;margin-top:12px!important}
+}
+/*@@ LAYOUT-UNIFY-3 @@*/
+/* ═══ 修正：box-sizing 兜底 + 容器内 header 自适应 + 表格竖屏防溢出 ═══ */
+.header,.container,.meta-bar,.home-topbar .ht-inner{box-sizing:border-box!important}
+.container > .header{width:auto!important;max-width:none!important;margin-left:0!important;margin-right:0!important}
+@media(max-width:900px){
+  table{max-width:100%!important}
+}
+
+/*@@ LAYOUT-UNIFY-4 @@*/
+body{padding:0!important;margin:0!important}
+
+/*@@ FLOW-GRID-2X2 @@*/
+.flow-grid{grid-template-columns:repeat(2,1fr)!important}
+@media(max-width:600px){.flow-grid{gap:10px}.flow-col{padding:12px}}
+
+/*@@ TABLE-FIT @@*/
+/* ═══ 窄屏/竖屏表格自适应屏宽（取消横向滚动，列宽随屏宽收缩、长内容自动换行） ═══ */
+@media(max-width:1100px){
+  table:not(.no-fit){display:table!important;width:100%!important;max-width:100%!important;min-width:0!important;table-layout:auto!important;overflow:visible!important;border-collapse:collapse!important}
+  table:not(.no-fit) th,table:not(.no-fit) td{overflow-wrap:break-word!important;word-break:break-word!important}
+}
+@media(max-width:900px){
+  table:not(.no-fit) th,table:not(.no-fit) td{padding:8px 6px!important;font-size:12px!important;line-height:1.5!important}
+}
+@media(max-width:600px){
+  table:not(.no-fit) th,table:not(.no-fit) td{padding:6px 5px!important;font-size:11px!important}
+}
+
+/*@@ VALUE-CARDS-4COL @@*/
+/* ═══ 品牌理念（四条）固定 1 行 4 列 ═══ */
+.value-cards{grid-template-columns:repeat(4,1fr)!important;gap:14px!important}
+.value-cards>.value-card{min-width:0}
+@media(max-width:900px){
+  .value-cards{grid-template-columns:repeat(4,1fr)!important;gap:8px!important}
+  .value-cards>.value-card{padding:11px 7px!important}
+  .value-cards .icon{font-size:1.5em!important;margin-bottom:6px!important}
+  .value-cards .name{font-size:.9em!important}
+  .value-cards .desc{font-size:.74em!important;line-height:1.45!important}
+}
+@media(max-width:600px){
+  .value-cards{grid-template-columns:repeat(4,1fr)!important;gap:5px!important}
+  .value-cards>.value-card{padding:9px 5px!important;border-radius:8px!important}
+  .value-cards .icon{font-size:1.25em!important;margin-bottom:4px!important}
+  .value-cards .name{font-size:.78em!important}
+  .value-cards .desc{font-size:.68em!important;line-height:1.4!important}
+}
+</style>
+</head>
+<body>
+<div class="home-topbar"><div class="ht-inner"><a href="../index.html">🏠 返回首页</a></div></div>
+
+<div class="header">
+  <span class="day-tag">📅 第1周 · Day 01</span>
+  <h1>🎉 欢迎加入我们的大家庭</h1>
+  <div class="subtitle">模块：文化 Culture | 今日主题：行业特性 · 企业文化 · 使命愿景 · 我们是谁</div>
+</div>
+
+<div class="container">
+
+<div class="lm-block lm-goal">
+  <h3>🎯 今日学习目标（学完你应该能做到）</h3>
+  <ul class="lm-list">
+      <li>认识门店：能说出门店名称、主营项目，并指出接待区、验光区、选镜区、加工区、取镜区分别在哪儿</li>
+      <li>看懂行业：能说出眼镜行业「半医半商、刚需长期、需求升级、竞争激烈」四个特性中的至少两个，理解它为什么既要做专业、又要做服务</li>
+      <li>理解使命：能用自己的话（不必逐字）讲清公司使命的核心意思</li>
+      <li>记住理念：能说出公司价值观「坚持做难而正确之事」，并背出 4 条品牌理念（诚实守信、勇于承担、深耕专业、引领创新）中的至少 3 条</li>
+      <li>了解公司：能说出公司的创立年份、覆盖区域，以及总部有哪些职能部门</li>
+      <li>认识伙伴：知道带教师傅是谁、当班同事怎么称呼，遇到问题先找谁</li>
+      <li>看懂路径：说清 8 周里你要学会什么、第 8 周结业要达到什么水平</li>
+  </ul>
+  <p class="lm-meta">⏱ 学习量控制：约 <strong>2 小时</strong> —— 精读讲解 60 分钟 ｜ 动手实践 45 分钟 ｜ 自测与订正 15 分钟</p>
+</div>
+
+  <!-- 第一部分：欢迎仪式 -->
+  <div class="section">
+    <h2>🌟 第一部分：欢迎与第一印象</h2>
+    <p>今天是你在这里的第一天。无论你之前有没有做过销售，有没有接触过眼镜行业——<strong>从今天起，一切重新开始。</strong></p>
+    <p>我们培养的，不只是会卖眼镜的人，而是真正懂得帮助顾客"看清世界"的专业人。这是一份有温度的工作。</p>
+    
+    <div class="highlight-box">
+      <div class="label">💡 入职第一天，带教师傅会带你做：</div>
+      <div class="checklist">
+        <div class="checklist-item">参观门店所有区域（前台、营业区、验光区、配镜区、库房、员工区）</div>
+        <div class="checklist-item">认识所有团队成员，了解各自分工</div>
+        <div class="checklist-item">领取工装、工牌、员工手册</div>
+        <div class="checklist-item">熟悉打卡系统和基本日常规范</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第二部分：行业特性 -->
+  <div class="section">
+    <h2>🔍 第二部分：行业特性 — 我们身处一个怎样的行业</h2>
+
+    <p>在讲"我们的公司和门店"之前，先弄明白一件事：<strong>眼镜零售，到底是一个什么样的行业？</strong>它不像卖衣服、卖手机那样简单——一头连着医疗，一头连着零售；一半靠专业，一半靠服务。看清这个行业的特性，你才会明白我们每天的工作为什么这样要求，价值又在哪里。</p>
+
+    <h3>⚕️ 特性一：半医半商 ——「专业」是立身之本</h3>
+    <p>眼镜行业最特殊的地方，在于它同时具备<strong>医疗</strong>与<strong>商业</strong>两重属性。验光、视功能检查、近视防控，本质上是"眼健康服务"，容不得半点马虎；而镜架镜片的挑选、搭配与售后，又是"零售服务"，讲究体验和沟通。这意味着：我们既是服务员，也是半个"健康守门人"。</p>
+    <div class="highlight-box">
+      <div class="label">💡 一句话记住：</div>
+      <p style="margin:6px 0;">普通零售卖错了可以退换；<strong>眼镜要是配错了，损害的是顾客的眼睛。</strong>这就是"半医"二字的分量，也是我们把每一项参数都验准的原因。</p>
+    </div>
+
+    <h3>🔄 特性二：刚需长期 —— 需求稳定，客群全覆盖</h3>
+    <p>"看不清"是刚需。近视一旦发生就不可逆、老视（老花）随年龄必然到来、孩子的度数还在发育期……只要有人需要看清世界，眼镜就有市场。所以这个行业<strong>不太受经济波动影响，复购稳定、客群极广</strong>——从几岁的孩子到七八十岁的老人，都是我们的服务对象。</p>
+
+    <h3>📈 特性三：需求升级 —— 从「卖一副眼镜」到「管一生眼健康」</h3>
+    <p>这几年行业发生了明显变化，三个趋势尤其值得新人了解：</p>
+    <ul>
+      <li><strong>近视低龄化、高发化</strong>：我国青少年近视率长期居高不下，近视防控已上升为国家战略，"科学验配 + 近视管理"成为门店的核心竞争力。</li>
+      <li><strong>人口老龄化</strong>：中老年人口比例持续上升，老视、白内障术后、眼底健康等问题，带来了大量中老年配镜与护眼需求。</li>
+      <li><strong>从"配镜"走向"全周期眼健康管理"</strong>：顾客要的不再只是"一副镜片"，而是一套能长期跟踪、科学干预的方案——这正是专业连锁门店的机会所在。</li>
+    </ul>
+
+    <h3>🏆 特性四：竞争激烈 —— 靠「专业 + 信任」建护城河</h3>
+    <p>街边眼镜店随处可见，价格战也很常见。但真正能留住顾客的，从来不是最低价，而是<strong>验得准、讲得清、服务好、信得过</strong>。谁更专业、更诚实、更愿意为顾客的长期视觉健康负责，谁就能在竞争中站稳脚跟。</p>
+
+    <div class="story-box">
+      <div class="story-title">📖 想一想：顾客为什么愿意多花几分钟听你讲？</div>
+      <p>因为在这个行业里，顾客买的不只是一件商品，而是一份"看得清、看得久"的安心。当你能把"度数为什么涨、这副镜片为什么适合他"讲明白时，你就不再只是一个"卖眼镜的"，而是一个值得托付的<strong>视觉健康顾问</strong>。理解了行业的这些特性，接下来"我们的使命"就顺理成章了。</p>
+    </div>
+  </div>
+
+  <!-- 第三部分：公司与门店 -->
+  <div class="section">
+    <h2>🏪 第三部分：我们的公司与门店</h2>
+
+    <h3>📖 公司历程（一分钟了解我们是谁）</h3>
+    <ul>
+      <li><strong>1999 年创立</strong>：创始人林邦多先生从温州入行、辗转多地来到永州，1998 年开拓冷水滩市场，1999 年在零陵区至善路创立第一家爱眼城眼镜。从一间小店、靠"手磨镜片"起家，逐步引进综合验光仪、半自动磨边机等专业设备。</li>
+      <li><strong>连锁发展</strong>：如今已发展为覆盖<strong>零陵、冷水滩、祁阳、蓝山</strong>两区两县的眼镜连锁企业。</li>
+      <li><strong>专家团队</strong>：以一级、二级验光技师组成核心技术团队，坚持"专业配眼镜"的立店之本，"以始为终"持续提升专业水平与服务质量。</li>
+    </ul>
+
+    <h3>🏢 公司组织架构（知道自己属于哪一环）</h3>
+    <table class="structure-table">
+      <thead><tr><th>层级</th><th>构成</th><th>主要职能</th></tr></thead>
+      <tbody>
+        <tr><td>总经理 / 营运部</td><td>公司最高管理层</td><td>统筹公司整体经营与发展方向</td></tr>
+        <tr><td>总部职能部门</td><td>财务部、人事部、培训部、市场部、仓储物流部</td><td>为各片区门店提供专业支持与保障</td></tr>
+        <tr><td>片区</td><td>零陵片区、冷水滩片区、祁阳片区（及蓝山门店）</td><td>门店日常运营、销售与服务</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.9em;color:#666;">💡 记住这条链路：你在门店工作，遇到需要公司层面支持的事项（如人事、培训、货品调拨），会经由片区 → 总部对应部门处理。</p>
+
+    <h3>📍 门店基本信息</h3>
+    <p>（此处由带教师傅结合实际门店情况补充：门店成立时间、地址、主要服务项目、主要顾客群体、门店运转等）</p>
+
+    <h3>🛎️ 我们提供的服务</h3>
+    <ul>
+      <li><strong>专业视力检查</strong>：电脑验光 + 综合验光 + 视功能检查</li>
+      <li><strong>眼镜配制服务</strong>：近视镜、老花镜、太阳镜、功能性镜片</li>
+      <li><strong>镜架调整整形</strong>：免费调整，确保配戴舒适</li>
+      <li><strong>售后维护服务</strong>：清洗、螺丝紧固、镜腿更换</li>
+      <li><strong>视觉健康咨询</strong>：青少年近视防控、老视管理等</li>
+    </ul>
+
+    <h3>👥 团队构成</h3>
+    <p>（带教师傅结合门店实际情况介绍：店长、验光师、配镜师、销售顾问等岗位分工）</p>
+  </div>
+
+  <!-- 第四部分：企业使命 -->
+  <div class="section">
+    <h2>🎯 第四部分：我们的使命 — 为什么存在</h2>
+    
+    <h3>📌 我们的使命</h3>
+    <div class="highlight-box">
+      <p style="font-size:1.15em; font-weight:700; color:#2e7d32; margin:8px 0;">
+        "我们将用臻于至善的工匠精神，为客户打造一流的视觉健康解决方案"
+      </p>
+    </div>
+
+    <p>这句话不是口号，它是我们每天工作的出发点。每当你面对一位顾客，记住：<strong>他们来这里，是因为眼睛需要帮助。</strong>你的专业和用心，直接影响他们的视觉质量和生活品质。</p>
+
+    <h3>🔍 为什么使命重要？</h3>
+    <p>想象一个刚上小学的孩子，看不清黑板又不敢告诉爸妈，度数一年涨一百多度，小学没毕业就要戴上厚厚的眼镜。又或者一位高度近视的年轻人，因为青少年时期度数没控制住，成年后视网膜病变的风险比常人高出数倍……这些都不是危言耸听，而是我们每天工作中真实面对的场景。</p>
+    <p><strong>我们做的不只是卖商品，我们在守护人们看世界的权利。</strong>尤其是面对正在发育的孩子，早一年的科学防控，可能就是他一生清晰的视力。</p>
+
+    <div class="story-box">
+      <div class="story-title">📖 真实故事：一年，我们把近视"按"在了原地</div>
+      <p>去年暑假，一位妈妈牵着 9 岁的儿子小宇走进店里，眉头紧锁："孩子上学期黑板有点看不清了，检查说是近视 175 度。他才三年级啊，照这个涨法，小学没毕业就要几百度了，怎么办？"
+我们的视光师没有急着让他"随便配副眼镜"，而是先给小宇建立了完整的屈光发育档案：测眼轴、查双眼视功能、问用眼习惯。一查才发现——小宇每天写作业趴得很低，回家后手机一玩就是一小时，每天户外活动还不到半小时。</p>
+      <p style="margin-top:8px;">我们为他定制了一整套近视防控方案：验配多点离焦镜片、执行"20-20-20"用眼法则、保证每天 2 小时户外阳光、纠正读写姿势，并坚持每 3 个月回店复查一次。妈妈很配合，把家里的台灯换成了专业护眼灯，还带着小宇每天晚饭后去楼下打半小时球。
+一年后复查那天，妈妈盯着验光单愣了好几秒："才涨了 25 度？眼轴几乎没怎么长？我记得邻居家孩子一年就涨了一百度！"
+视光师笑着说："近视一旦发生就不可逆，我们能做的，就是让每一度都涨得慢一点。这一年，孩子度数基本控制住了，这就是防控的意义。"</p>
+      <p style="margin-top:8px; color:#6a1b9a; font-weight:600;">近视防控是一场和时间的赛跑，防住的是度数，守住的是孩子一生的清晰视界。这就是我们做好这份工作的意义——让每一双眼睛都能看到清晰美好的世界。</p>
+    </div>
+  </div>
+
+  <!-- 第五部分：愿景与核心价值观 -->
+  <div class="section">
+    <h2>🌈 第五部分：愿景、价值观与品牌理念</h2>
+
+    <h3>🔭 我们的愿景</h3>
+    <div class="highlight-box">
+      <p style="font-size:1.1em; font-weight:700; color:#1565c0;">"让客户更加满意，让员工更有尊严，让企业更受尊重"</p>
+    </div>
+
+    <p>愿景是我们努力的方向。不是最大，而是<strong>满意、尊严、尊重</strong>。每位员工的每一次用心服务，都在帮助门店靠近这个目标。</p>
+
+    <h3>💎 价值观</h3>
+    <div class="highlight-box">
+      <p style="font-size:1.1em; font-weight:700; color:#6a1b9a; margin:8px 0;">"坚持做难而正确之事"</p>
+    </div>
+    <p>什么是"难而正确之事"？就是<strong>短期看费劲、长期看正确</strong>的事：多花 10 分钟把验光问诊做细，而不是应付了事；顾客预算不够时推荐更实惠的方案，而不是推最贵的；发现配镜参数有疑问，宁可重验一次也不心存侥幸。选择"难"的那条路，正是我们区别于普通眼镜店的地方。</p>
+
+    <h3>🏷️ 品牌理念（四条，请背下来）</h3>
+    <div class="value-cards">
+      <div class="value-card">
+        <div class="icon">🤝</div>
+        <div class="name">诚实守信</div>
+        <div class="desc">说到做到，对顾客诚实，不夸大、不欺骗、不以次充好</div>
+      </div>
+      <div class="value-card">
+        <div class="icon">🛡️</div>
+        <div class="name">勇于承担</div>
+        <div class="desc">出了问题不推诿、不找借口，先解决顾客的事，再复盘自己的错</div>
+      </div>
+      <div class="value-card">
+        <div class="icon">🔬</div>
+        <div class="name">深耕专业</div>
+        <div class="desc">把验光、配镜、视光知识学深学透，用专业赢得顾客信任</div>
+      </div>
+      <div class="value-card">
+        <div class="icon">💡</div>
+        <div class="name">引领创新</div>
+        <div class="desc">不满足于"一直这么做"，主动学习新技术、新方法，带动门店进步</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第六部分：我的角色 -->
+  <div class="section">
+    <h2>🙋 第六部分：我在团队中的角色</h2>
+
+    <h3>📌 你的岗位职责（销售顾问/配镜师）</h3>
+    <ul>
+      <li><strong>顾客接待</strong>：热情迎接每一位进店顾客，了解需求</li>
+      <li><strong>产品推荐</strong>：根据顾客需求，专业推荐合适的镜架和镜片</li>
+      <li><strong>验光配合</strong>：协助验光师完成接待、沟通和配镜流程</li>
+      <li><strong>售后服务</strong>：处理取镜、调整、维修等售后事务</li>
+      <li><strong>门店维护</strong>：保持陈列整洁，参与日常运营</li>
+    </ul>
+
+    <div class="highlight-box">
+      <div class="label">🌟 你的成功路径：8周成长地图</div>
+      <ol style="padding-left:18px; margin-top:8px;">
+        <li style="margin-bottom:6px;"><strong>第1-2周</strong>：学习文化、制度和产品知识——"认识这个世界"</li>
+        <li style="margin-bottom:6px;"><strong>第3-4周</strong>：掌握基础技能和销售话术——"开始动手开口"</li>
+        <li style="margin-bottom:6px;"><strong>第5-6周</strong>：熟练流程，进阶话术——"独立处理日常"</li>
+        <li style="margin-bottom:6px;"><strong>第7-8周</strong>：综合演练，通过考核——"合格上岗"</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 今日总结 -->
+  
+<!-- LM-START -->
+<div class="lm-block lm-practice">
+  <h3>🔧 动手实践任务（今日必做）</h3>
+    <div class="lm-pr">
+      <div class="lm-pr-t">任务 1：跟着动线走一圈（约 15 分钟）</div>
+      <div class="lm-pr-d">请师傅带你按顾客进店的顺序走一遍：门口迎宾 → 接待区问需求 → 验光区检查 → 选镜区挑镜架镜片 → 收银 → 取镜/售后。边走边记，每个区域写下 1 句话功能。</div>
+      <div class="lm-pr-o">✅ 完成标准：能独立画出这条动线，并说出每个区域你以后会做什么。</div>
+    </div>
+    <div class="lm-pr">
+      <div class="lm-pr-t">任务 2：30 秒自我介绍 + 使命复述（约 10 分钟）</div>
+      <div class="lm-pr-d">向师傅做一次自我介绍：我叫什么、从哪儿来、以后在店里主要负责什么；讲完再用自己的话把门店使命复述一遍。</div>
+      <div class="lm-pr-o">✅ 完成标准：师傅听完能听懂你是谁、你要干什么；使命复述不要求字字一致，意思对即可。</div>
+    </div>
+    <div class="lm-pr">
+      <div class="lm-pr-t">任务 3：换位体验：当一次顾客（约 15 分钟）</div>
+      <div class="lm-pr-d">站在顾客进门的门口往里看 1 分钟，写下「第一眼看到什么、哪里最吸引我、哪里显得乱」。</div>
+      <div class="lm-pr-o">✅ 完成标准：写出 3 条观察，交给师傅，作为以后你维护门店形象的第一份笔记。</div>
+    </div>
+</div>
+<div class="lm-block lm-faq">
+  <h3>⚠️ 常见问题与注意事项</h3>
+    <details class="lm-q">
+      <summary>❓ 第一天信息太多，记不住怎么办？</summary>
+      <div class="lm-a">正常。记忆分三层：今天必须记住的（门店名、师傅称呼、动线、使命大意）；先知道在哪查的（考勤、薪酬、处罚标准）；以后慢慢熟的（产品、话术）。今天的重点是前两层。</div>
+    </details>
+    <details class="lm-q">
+      <summary>❓ 我是零基础，怕学不会。</summary>
+      <div class="lm-a">整个课程就是为零基础设计的。前几天先认识人和规矩，第 2 周才开始认产品，第 3 周才动手，第 5 周才跟岗，第 6 周才独立接单。每天只要完成当天的实践任务，不会掉队。</div>
+    </details>
+    <details class="lm-q">
+      <summary>❓ 顾客问我一个我不知道的问题，怎么办？</summary>
+      <div class="lm-a">不能猜、不能瞎编。标准回答：「这个问题我帮您确认一下，马上请我们师傅给您答复。」然后立刻去找师傅——这叫「不欺客」，也是品牌理念里「诚实守信」的要求。</div>
+    </details>
+    <details class="lm-q">
+      <summary>❓ 门店里什么是绝对的红线？</summary>
+      <div class="lm-a">四条：不欺骗顾客、不私自收钱/改价、不泄露顾客资料、不在店里做与工作无关的私事（含长时间玩手机）。具体条款在第 4、5 天会讲。</div>
+    </details>
+</div>
+
+<!-- LM-END -->
+
+<!-- FLOW-START -->
+<div class="lm-block flow-block">
+  <h3>🔗 四大流程落地衔接 — 本日内容如何进入门店培训体系</h3>
+  <div class="flow-hook">💡 <b>今天你只要记住这一句：</b>今天不要求你记住所有东西，只要做到一件事：认识这个店、认识这群人，知道遇到问题该找谁。</div>
+  <p class="flow-sub">本日内容对应：<strong>入职适应阶段 · 首日</strong>　｜　把今天学的，直接接入「标准—带教—考核—优化」闭环。</p>
+  <div class="flow-grid">
+<div class="flow-col flow-std"><div class="flow-h">① 标准 <span class="fh-tag">教什么</span></div><div class="flow-say"><b>一句话：</b>把企业的样子装进脑子：叫什么、做什么、为什么值得干，以及你要遵守哪些基本规矩。</div><div class="flow-do-t">📋 具体怎么做</div><ul class="flow-do"><li>跟训练员走遍门店一遍：收银台、验光室、加工间、货区、休息室，每个区域都知道是干什么的</li><li>背下门店全称、服务口号，记住 3 位关键联系人（训练员、值班经理、店长）的名字和联系方式</li><li>拿到《员工手册》先看目录，重点看‘考勤’‘奖惩’‘安全’三章</li></ul><div class="flow-standard"><b>✔ 完成标准：</b>能说出门店全称 + 服务口号 + 3 位关键联系人，就算过关。</div><div class="flow-pit"><b>⚠ 常见坑：</b>别想着一口气背完手册——首日只要知道‘有这些规定、需要时去哪查’就够了，后面每天都会用到。</div></div>
+<div class="flow-col flow-teach"><div class="flow-h">② 带教 <span class="fh-tag">怎么教</span></div><div class="flow-say"><b>一句话：</b>训练员带着你把‘书面制度’变成‘现场认知’，用看得见的方式让你一天就熟悉环境。</div><div class="flow-do-t">📋 具体怎么做</div><ul class="flow-do"><li>带新人按顾客进店动线走一遍，边走边说：‘顾客从这里进来，第一眼看到什么、我们第一时间做什么’</li><li>逐个介绍同事时，说清每个人负责什么，让新人知道‘这件事该找谁’</li><li>示范一次标准问候和自我介绍，让新人当场跟做一遍</li></ul><div class="flow-standard"><b>✔ 完成标准：</b>新人能独立复述门店动线，并说出 3 位同事的职责，视为带教完成。</div><div class="flow-pit"><b>⚠ 常见坑：</b>别只发手册让新人自己看——第一天最重要的是‘人熟、路熟’，心里不慌才学得进。</div></div>
+<div class="flow-col flow-check"><div class="flow-h">③ 考核 <span class="fh-tag">是否达标</span></div><div class="flow-say"><b>一句话：</b>首日不考业务，只做‘认知确认’，确保新人真的了解了环境和规矩。</div><div class="flow-do-t">📋 具体怎么做</div><ul class="flow-do"><li>口头抽查：说出企业使命 + 3 位同事姓名与职责</li><li>新人当场演示一次标准问候与自我介绍</li><li>在《首日确认单》上签字，作为带教计划正式启动的凭证</li></ul><div class="flow-standard"><b>✔ 完成标准：</b>口头问题能答上、问候动作能做对，即首日达标。</div><div class="flow-pit"><b>⚠ 常见坑：</b>首日考核切忌‘下马威’式提问，目的是确认而非施压，答不上就当场教会。</div></div>
+<div class="flow-col flow-opt"><div class="flow-h">④ 优化 <span class="fh-tag">持续迭代</span></div><div class="flow-say"><b>一句话：</b>把新人首日的疑问收集起来，若反复出现‘制度看不懂’，就回头把《新人入职指引》改得更通俗。</div><div class="flow-do-t">📋 具体怎么做</div><ul class="flow-do"><li>训练员记下新人当天问得最多的 3 个问题</li><li>若某个问题多人问、或表述容易误解，反馈给店长优化手册措辞</li></ul><div class="flow-standard"><b>✔ 完成标准：</b>当天结束前，把新人疑问汇总记录，视为优化动作完成。</div><div class="flow-pit"><b>⚠ 常见坑：</b>别把疑问当成‘新人记性差’——问得多，往往是手册写得不够清楚，要改的是材料不是人。</div></div>
+  </div>
+  <p class="flow-meta">👤 <b>责任角色：</b>新员工（学习执行）· 训练员（带教施教）· 值班经理（检查考核）· 门店负责人（审批优化）</p>
+</div>
+<!-- FLOW-END -->
+
+  <div class="nav-footer">
+    <a class="nav-btn outline" href="../index.html">🏠 首页</a>
+    
+    <a class="nav-btn" href="Day_01_练习题.html">今日练习题 →</a>
+  </div>
+
+</div>
+</body>
+</html>
