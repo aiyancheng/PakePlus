@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 42 | 第6周总结复盘 — 独立接单训练</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Microsoft YaHei',Arial,sans-serif;background:#f5f7fa;color:#333;}
+  .header{background:linear-gradient(135deg,#2980b9,#1a5276);padding:40px 30px;color:white;}
+  .day-tag{background:rgba(255,255,255,0.2);color:white;display:inline-block;padding:4px 16px;border-radius:20px;font-size:0.85em;margin-bottom:12px;}
+  .header h1{font-size:2em;margin-bottom:8px;}
+  .header .subtitle{opacity:0.9;}
+  .container{max-width:900px;margin:30px auto;padding:0 20px;}
+  .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0;}
+  .review-card{background:white;border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.07);}
+  .review-card h4{color:#1a5276;margin-bottom:8px;font-size:0.92em;}
+  .review-card ul{padding-left:16px;}
+  .review-card li{font-size:0.8em;line-height:1.7;color:#555;}
+  .section-title{font-size:1.2em;color:#1a5276;font-weight:700;margin:32px 0 14px;padding-left:12px;border-left:4px solid #2980b9;}
+  .question-card{background:white;border-radius:12px;padding:26px;margin-bottom:22px;box-shadow:0 2px 10px rgba(0,0,0,0.07);}
+  .q-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .q-num{background:#2980b9;color:white;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9em;flex-shrink:0;}
+  .q-type{background:#e3f0fa;color:#1a5276;padding:3px 12px;border-radius:12px;font-size:0.8em;font-weight:600;}
+  .q-score{color:#999;font-size:0.82em;}
+  .question-text{font-size:1em;color:#333;font-weight:600;line-height:1.6;margin-bottom:16px;}
+  .options li{padding:10px 16px;border:2px solid #e0e0e0;border-radius:8px;margin-bottom:8px;font-size:0.93em;list-style:none;}
+  .answer-area{width:100%;min-height:90px;border:2px solid #e0e0e0;border-radius:8px;padding:12px;font-family:inherit;font-size:0.93em;resize:vertical;}
+  .answer-hint{background:#f9f9f9;padding:10px 14px;margin-top:12px;font-size:0.85em;color:#666;display:none;}
+  .show-answer-btn{background:none;border:1px solid #9E9E9E;color:#666;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.82em;margin-top:10px;}
+  .rx-box{background:#f5f5f5;border-radius:8px;padding:16px;margin:12px 0;font-size:0.9em;}
+  .score-box{background:linear-gradient(135deg,#e8f4fb,#f2f9fe);border-radius:12px;padding:20px;margin:24px 0;}
+  .score-box h3{color:#1a5276;margin-bottom:12px;}
+  .score-table{width:100%;border-collapse:collapse;}
+  .score-table th{background:#2980b9;color:white;padding:8px 12px;text-align:left;font-size:0.88em;}
+  .score-table td{padding:8px 12px;border-bottom:1px solid #e0e0e0;font-size:0.86em;}
+  .nav-footer{display:flex;justify-content:space-between;margin:30px 0 50px;gap:12px;flex-wrap:wrap;}
+  .nav-btn{background:#2980b9;color:white;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:0.9em;}
+  .nav-btn.outline{background:white;color:#1a5276;border:2px solid #2980b9;}
+  @media(max-width:600px){.review-grid{grid-template-columns:1fr;}}
+  .structure-table,.rule-table{width:100%;border-collapse:collapse;margin:14px 0;}
+  .structure-table th,.rule-table th{background:#2980b9;color:white;padding:10px 14px;text-align:center;font-size:0.9em;}
+  .structure-table td,.rule-table td{padding:10px 14px;border-bottom:1px solid #f0f0f0;font-size:0.88em;}
+  .structure-table tr:nth-child(even) td,.rule-table tr:nth-child(even) td{background:#f9f9f9;}
+
+@media (min-width:901px) and (max-width:1400px){
+  .container{max-width:1300px!important;padding:26px 24px!important}
+  body{font-size:16px}
+  .header{padding:34px 28px!important}
+  .header h1{font-size:1.8em!important}
+  img{max-width:100%;height:auto}
+  table{max-width:100%}
+}
+@media (max-width:900px){
+  body{font-size:15px;overflow-x:hidden}
+  .container{max-width:100%!important;padding:18px 14px!important;margin:16px auto!important}
+  .header{padding:24px 16px!important}
+  .header h1{font-size:1.45em!important;line-height:1.35!important}
+  .header .subtitle,.header .day-tag,.header .week-badge{font-size:13px!important}
+  h2{font-size:1.2em!important}
+  h3{font-size:1.08em!important}
+  .nav-footer,.nav-bar{flex-wrap:wrap!important;gap:10px!important}
+  .nav-btn,.nav-footer a,.nav-bar a{font-size:.9em!important;padding:10px 16px!important;text-align:center!important}
+  table{display:block!important;overflow-x:auto!important;width:max-content!important;min-width:100%!important;-webkit-overflow-scrolling:touch}
+  img,svg,video{max-width:100%!important}
+  p,li,td,th{overflow-wrap:break-word}
+  [class*="-row"]:not(.nav-footer):not(.nav-bar),[class*="-cards"],[class*="-list"]{flex-wrap:wrap!important}
+  .review-grid{grid-template-columns:repeat(2,1fr)!important;gap:12px!important}
+}
+@media (max-width:600px){
+  .container{padding:14px 10px!important}
+  .header h1{font-size:1.25em!important}
+  .review-grid{grid-template-columns:1fr!important}
+}
+
+.home-topbar{background:#fff;padding:10px 0}
+.home-topbar .ht-inner{max-width:900px;margin:0 auto;padding:0 30px}
+.home-topbar a{display:inline-flex;align-items:center;gap:6px;font-size:.86em;font-weight:700;color:#4a5270;text-decoration:none;background:#f1f3f9;border-radius:20px;padding:7px 18px;transition:background .2s,color .2s,transform .2s}
+.home-topbar a:hover{background:#e6eaf6;color:#283593;transform:translateX(-2px)}
+@media (min-width:901px) and (max-width:1400px){.home-topbar .ht-inner{max-width:1300px}}
+@media (max-width:900px){.home-topbar{padding:8px 0}.home-topbar .ht-inner{max-width:100%;padding:0 14px}.home-topbar a{font-size:.82em;padding:6px 14px}}
+
+  .flow-block{background:#f5f8fd;border:1px solid #dbe6f5;border-radius:14px;padding:24px 26px;margin:26px 0}
+  .flow-block h3{margin:0 0 12px;font-size:1.12em;color:#1a3a6b;font-weight:700}
+  .flow-hook{background:#eaf1fb;border-left:4px solid #2c5aa0;border-radius:8px;padding:13px 16px;margin:0 0 14px;font-size:.93em;color:#2c3e50;line-height:1.75}
+  .flow-hook b{color:#1a3a6b}
+  .flow-sub{margin:0 0 18px;font-size:.9em;color:#556}
+  .flow-sub strong{color:#1a3a6b}
+  .flow-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .flow-col{border-radius:12px;padding:16px 18px;background:#fff;box-shadow:0 1px 4px rgba(26,58,107,.05)}
+  .flow-h{font-weight:800;font-size:.98em;margin-bottom:10px;color:#1a3a6b;display:flex;align-items:center;gap:6px}
+  .flow-h .fh-tag{font-size:.7em;font-weight:700;color:#fff;border-radius:5px;padding:2px 7px;letter-spacing:.5px}
+  .flow-std .flow-h{color:#2c5aa0}.flow-std .fh-tag{background:#2c5aa0}
+  .flow-teach .flow-h{color:#2e7d5b}.flow-teach .fh-tag{background:#2e7d5b}
+  .flow-check .flow-h{color:#c47f17}.flow-check .fh-tag{background:#c47f17}
+  .flow-opt .flow-h{color:#8e44ad}.flow-opt .fh-tag{background:#8e44ad}
+  .flow-say{font-size:.88em;color:#37475e;background:#f6f9ff;border-radius:8px;padding:10px 12px;margin-bottom:12px;line-height:1.7;border-left:3px solid #cdd9ec}
+  .flow-say b{color:#1a3a6b}
+  .flow-do-t{font-size:.82em;font-weight:800;color:#556;margin:12px 0 6px}
+  .flow-do{margin:0;padding-left:19px}
+  .flow-do li{font-size:.85em;line-height:1.7;margin-bottom:6px;color:#4a5568}
+  .flow-standard{font-size:.84em;color:#2e7d32;background:#eef8f0;border-radius:7px;padding:9px 12px;margin-top:12px;line-height:1.65}
+  .flow-standard b{color:#1b5e20}
+  .flow-pit{font-size:.84em;color:#b3541e;background:#fdf3ea;border-radius:7px;padding:9px 12px;margin-top:8px;line-height:1.65}
+  .flow-pit b{color:#8a3d0a}
+  .flow-meta{margin:18px 0 0;font-size:.84em;color:#5a6478;background:#eef3fb;border-radius:8px;padding:12px 16px;line-height:1.7}
+  .flow-meta b{color:#1a3a6b}
+  @media(max-width:900px){
+    .flow-grid{grid-template-columns:1fr;gap:12px}
+    .flow-block{padding:18px 16px}
+    .flow-say,.flow-do li,.flow-standard,.flow-pit{font-size:.86em}
+  }
+
+  .day-part{margin:34px 0 18px;padding:16px 20px;background:linear-gradient(135deg,#e8f4fb,#f3f9fe);border-radius:12px}
+  .day-part .day-part-h{font-size:1.08em;font-weight:800;color:#154360;display:flex;align-items:center;gap:10px}
+  .day-part .dp-no{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#2980b9;color:#fff;font-size:.9em;font-weight:800;flex-shrink:0}
+  .day-part .day-part-d{margin:8px 0 0;font-size:.88em;color:#667;line-height:1.7}
+  @media(max-width:900px){.day-part{margin:26px 0 14px;padding:14px 16px}}
+
+  .lm-block{position:relative;border-radius:16px;padding:22px 26px 20px;margin:22px 0;line-height:1.85;border:1px solid transparent;box-shadow:0 2px 12px rgba(26,58,107,.06);}
+  .lm-block::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:4px;border-radius:4px;background:currentColor;opacity:.55;}
+  .lm-block h3{margin:0 0 16px;font-size:1.12em;font-weight:800;letter-spacing:.3px;display:flex;align-items:center;gap:9px;padding-bottom:12px;border-bottom:1px dashed rgba(0,0,0,.12);}
+  .lm-list{margin:0;padding-left:0;list-style:none}
+  .lm-list li{position:relative;margin-bottom:11px;padding-left:24px;line-height:1.8;}
+  .lm-list li::before{content:"✓";position:absolute;left:2px;top:0;font-weight:800;font-size:.92em;color:currentColor;opacity:.7;}
+  .lm-list li:last-child{margin-bottom:0}
+  .lm-goal{background:linear-gradient(135deg,#eaf7ec,#f4fbf5);color:#1b5e20;border-color:#c8e6c9}
+  .lm-goal h3{color:#2e7d32}
+  .lm-practice{background:linear-gradient(135deg,#fff6e0,#fffcf3);color:#4e342e;border-color:#ffe0a3}
+  .lm-practice h3{color:#e65100}
+  .lm-faq{background:linear-gradient(135deg,#f6e9f9,#fbf5fd);color:#4a148c;border-color:#e6ccf0}
+  .lm-faq h3{color:#7b1fa2}
+  .lm-quiz{background:linear-gradient(135deg,#fde8ef,#fef6f9);color:#880e4f;border-color:#f8cddc}
+  .lm-quiz h3{color:#c2185b}
+  .lm-meta{margin:14px 0 0;font-size:.88em;opacity:.94;background:rgba(255,255,255,.65);border-radius:9px;padding:10px 14px;line-height:1.7;}
+  .lm-pr{margin:0 0 14px;padding:15px 18px;background:rgba(255,255,255,.82);border-radius:12px;border-left:3px solid #ffb74d;box-shadow:0 1px 5px rgba(0,0,0,.04);}
+  .lm-pr:last-child{margin-bottom:0}
+  .lm-pr-t{font-weight:800;margin-bottom:7px;font-size:1.01em;color:#bf360c}
+  .lm-pr-d{margin-bottom:8px;font-size:.96em;line-height:1.75}
+  .lm-pr-o{font-size:.9em;font-weight:700;color:#2e7d32;background:#eef8ef;border-radius:7px;padding:7px 12px;display:block;}
+  .lm-q{margin:0 0 10px;padding:12px 16px;background:rgba(255,255,255,.82);border-radius:11px;border-left:3px solid rgba(0,0,0,.14);transition:.18s;}
+  .lm-q:hover{border-left-color:currentColor}
+  .lm-q:last-child{margin-bottom:0}
+  .lm-q summary{cursor:pointer;font-weight:700;line-height:1.7;outline:none;list-style:none;position:relative;padding-right:26px}
+  .lm-q summary::-webkit-details-marker{display:none}
+  .lm-q summary::after{content:"+";position:absolute;right:2px;top:-1px;font-weight:800;font-size:1.15em;color:currentColor;opacity:.6;transition:.2s;}
+  .lm-q[open] summary::after{content:"−"}
+  .lm-q[open] summary{margin-bottom:10px;padding-bottom:9px;border-bottom:1px dashed rgba(0,0,0,.1)}
+  .lm-a{font-size:.95em;color:#212121;line-height:1.82;padding-left:2px}
+  .lm-a b{color:#c2185b}
+  .lm-faq .lm-a b{color:#7b1fa2}
+  @media(max-width:900px){
+    .lm-block{padding:17px 16px 15px;margin:16px 0;line-height:1.75;border-radius:13px}
+    .lm-block h3{font-size:1.02em;margin-bottom:13px}
+    .lm-pr{padding:13px 14px}
+  }
+
+/*@@ LAYOUT-UNIFY @@*/
+.home-topbar .ht-inner{width:min(1300px,calc(100% - 32px))!important;max-width:1300px!important;margin:0 auto!important}
+.header{
+  width:min(1300px,calc(100% - 32px))!important;max-width:1300px!important;
+  margin:18px auto 0!important;padding:34px 30px!important;
+  border:0!important;border-radius:14px!important;
+  box-shadow:0 6px 22px rgba(0,0,0,.08)!important;
+}
+.container{
+  width:min(1300px,calc(100% - 32px))!important;max-width:1300px!important;
+  margin-left:auto!important;margin-right:auto!important;
+  padding-left:0!important;padding-right:0!important;
+}
+@media(max-width:900px){
+  .header{padding:24px 18px!important;margin-top:14px!important;border-radius:12px!important}
+}
+@media(max-width:600px){
+  .header{padding:20px 15px!important}
+}
+/*@@ LAYOUT-UNIFY-3 @@*/
+.header,.container,.meta-bar,.home-topbar .ht-inner{box-sizing:border-box!important}
+.container > .header{width:auto!important;max-width:none!important;margin-left:0!important;margin-right:0!important}
+/*@@ LAYOUT-UNIFY-4 @@*/
+body{padding:0!important;margin:0!important}
+
+/*@@ FLOW-GRID-2X2 @@*/
+.flow-grid{grid-template-columns:repeat(2,1fr)!important}
+@media(max-width:600px){.flow-grid{gap:10px}.flow-col{padding:12px}}
+
+/*@@ TABLE-FIT @@*/
+@media(max-width:1100px){
+  table:not(.no-fit){display:table!important;width:100%!important;max-width:100%!important;min-width:0!important;table-layout:auto!important;overflow:visible!important;border-collapse:collapse!important}
+  table:not(.no-fit) th,table:not(.no-fit) td{overflow-wrap:break-word!important;word-break:break-word!important}
+}
+@media(max-width:900px){
+  table:not(.no-fit) th,table:not(.no-fit) td{padding:8px 6px!important;font-size:12px!important;line-height:1.5!important}
+}
+@media(max-width:600px){
+  table:not(.no-fit) th,table:not(.no-fit) td{padding:6px 5px!important;font-size:11px!important}
+}
+
+/*@@ REVIEW-GRID-2x3 @@*/
+.review-grid{grid-template-columns:repeat(3,1fr)!important;gap:14px!important}
+.review-grid>.review-card{min-width:0}
+@media(max-width:900px){
+  .review-grid{grid-template-columns:repeat(3,1fr)!important;gap:9px!important}
+  .review-grid>.review-card{padding:12px 11px!important}
+  .review-grid>.review-card h4{font-size:.82em!important;margin-bottom:6px!important}
+  .review-grid>.review-card ul{padding-left:14px!important}
+  .review-grid>.review-card li{font-size:.72em!important;line-height:1.6!important}
+}
+@media(max-width:600px){
+  .review-grid{grid-template-columns:repeat(3,1fr)!important;gap:6px!important}
+  .review-grid>.review-card{padding:9px 8px!important;border-radius:8px!important}
+  .review-grid>.review-card h4{font-size:.74em!important;margin-bottom:5px!important}
+  .review-grid>.review-card ul{padding-left:12px!important}
+  .review-grid>.review-card li{font-size:.66em!important;line-height:1.55!important}
+}
+</style>
+</head>
+<body>
+<div class="home-topbar"><div class="ht-inner"><a href="../index.html">🏠 返回首页</a></div></div>
+
+<div class="header">
+  <span class="day-tag">📅 第6周 · Day 42 — 总结复盘</span>
+  <h1>📋 第6周总结复盘：独立接单训练</h1>
+  <div class="subtitle">覆盖 Day 36–41 ｜ 本周学习要点 · 重点难点 · 掌握情况 · 改进方向</div>
+</div>
+<div class="container">
+
+<div class="lm-block lm-goal">
+  <h3>🎯 今日学习目标（学完你应该能做到）</h3>
+  <ul class="lm-list">
+      <li>系统复盘本周 6 个独立接单模块，能连贯复述「接待 → 议价 → 儿童 → 中老年 → 太阳镜 → 售后」全场景服务链</li>
+      <li>掌握「流程优先」的稳定感：紧张时回到标准接待 7 步，就不会乱</li>
+      <li>明确本周的<strong>重点与难点</strong>，知道哪些环节最容易踩坑、怎么破</li>
+      <li>对照自评表客观评估<strong>掌握情况</strong>，找出 2 个最需补强的环节</li>
+      <li>完成独立周测卷（理论 60 分 + 实操 40 分），检验「敢不敢上、做得对不对」</li>
+  </ul>
+  <p class="lm-meta">⏱ 学习量控制：约 <strong>1.5 小时</strong> —— 复盘梳理 45 分钟 ｜ 周测作答 45 分钟 ｜ 错题订正 30 分钟</p>
+</div>
+
+  <div class="day-part">
+    <div class="day-part-h"><span class="dp-no">①</span>本周总结复盘</div>
+    <p class="day-part-d">按「学习要点 → 重点难点 → 掌握情况 → 改进方向」四步完成复盘，把这一周的独立接单经历沉淀成真正的能力。</p>
+  </div>
+
+  <div class="section-title">① 本周学习要点</div>
+  <div class="review-grid">
+    <div class="review-card"><h4>Day 36 独立接待</h4><ul><li>标准接待流程 7 步</li><li>4 个卡壳点与应对</li><li>兜底三句话</li></ul></div>
+    <div class="review-card"><h4>Day 37 价格异议</h4><ul><li>异议 3 类成因</li><li>六大处理技巧</li><li>成交促进 4 法</li></ul></div>
+    <div class="review-card"><h4>Day 38 儿童配镜</h4><ul><li>儿童视力发育</li><li>散瞳验光/假性近视</li><li>镜架 5 要点</li></ul></div>
+    <div class="review-card"><h4>Day 39 中老年/老视</h4><ul><li>老视成因与度速</li><li>3 类老花镜</li><li>渐进镜验配 5 步</li></ul></div>
+    <div class="review-card"><h4>Day 40 太阳镜/功能镜</h4><ul><li>UV400 与镜片类型</li><li>场景化推荐 3 步</li><li>交叉销售时机</li></ul></div>
+    <div class="review-card"><h4>Day 41 售后服务</h4><ul><li>标准服务项目</li><li>取镜回访话术</li><li>客户档案建立</li></ul></div>
+  </div>
+
+  <div class="section-title">② 本周重点难点</div>
+  <table class="rule-table">
+    <thead><tr><th>重点 / 难点</th><th>容易出错的地方</th><th>破解方法</th></tr></thead>
+    <tbody>
+      <tr><td>独立接待的「流程优先」（易僵场）</td><td>一紧张就忘词、卡壳，或者乱推荐</td><td>背熟标准接待 7 步，紧张时回到流程；准备「兜底三句话」，答不上来诚实说「我请验光师帮您确认」，不装懂</td></tr>
+      <tr><td>价格异议「先认同后解释、不马上降价」（易踩坑）</td><td>客户一说贵就立刻降价、不停解释参数、用开放式问题给自己挖坑</td><td>守住顺序：先认同 → 用价值/场景重新定义价格（从「成本」到「投资」）→ 给方案后沉默等待；不擅自改价、不贬低同行</td></tr>
+      <tr><td>儿童配镜「散瞳 + 沟通家长」（易越界）</td><td>用电脑验光直接配镜、按成人标准、把假性近视配成真近视</td><td>12 岁以下首次建议散瞳验光凭处方配镜；对家长遵循「专业不吓人、讲清后果、给可执行建议」，讲清远视储量与防控产品</td></tr>
+      <tr><td>老视与渐进镜「瞳高 + 适应期」（易返工）</td><td>瞳高测不准、没交代适应期、把老视当疾病或远视</td><td>渐进镜必须戴镜架精确标瞳高；主动说明 1–2 周适应期、初戴轻微头晕属正常并给分步适应建议；讲清老视是自然衰老不是疾病</td></tr>
+      <tr><td>售后回访「关怀不推销」（易变味）</td><td>回访变成硬推销、时机不对、档案不填</td><td>回访以关怀为主、保持简短（1–2 分钟）；选工作日下午或晚上；当天完善客户档案，趁记忆新鲜</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">③ 掌握情况自评</div>
+  <p style="color:#667;font-size:.9em;margin:0 0 10px;">逐项自评并写出依据，做到「心里有数」；自评后请师傅确认（自评与师傅差距大的项，往往是认知盲区）。</p>
+  <table class="rule-table">
+    <thead><tr><th>复盘项目</th><th>自评等级</th><th>判断依据（举一个具体行为）</th></tr></thead>
+    <tbody>
+      <tr><td>独立完成一次完整接待（7 步）</td><td>□ 熟练　□ 掌握　□ 待加强</td><td>&nbsp;</td></tr>
+      <tr><td>价格异议处理与成交收口</td><td>□ 熟练　□ 掌握　□ 待加强</td><td>&nbsp;</td></tr>
+      <tr><td>儿童配镜专项服务</td><td>□ 熟练　□ 掌握　□ 待加强</td><td>&nbsp;</td></tr>
+      <tr><td>老视配镜与中老年服务</td><td>□ 熟练　□ 掌握　□ 待加强</td><td>&nbsp;</td></tr>
+      <tr><td>太阳镜与功能性眼镜销售</td><td>□ 熟练　□ 掌握　□ 待加强</td><td>&nbsp;</td></tr>
+      <tr><td>售后服务与客户维护</td><td>□ 熟练　□ 掌握　□ 待加强</td><td>&nbsp;</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">④ 改进方向</div>
+  <ul style="padding-left:22px;line-height:2;color:#445;font-size:.95em">
+    <li><strong>练流程肌肉记忆</strong>：每天开口前默一遍标准接待 7 步，把「迎宾→问需求→验光→推荐→试戴→制单→送客」走成下意识动作。</li>
+    <li><strong>练议价收口</strong>：每天练 3 轮「报价—异议—处理—成交」，重点练最后一步的「假设成交 / 二择一」，做到自然不突兀。</li>
+    <li><strong>补专项客群知识</strong>：把儿童散瞳/远视储量、老视度速表、渐进镜三区与瞳高这三块背熟，敢张嘴讲、讲得准。</li>
+    <li><strong>守价格与权限底线</strong>：不擅自改价、不贬低同行、超权限及时升级，不为了成单乱承诺。</li>
+    <li><strong>清错题</strong>：把本周周测错题整理成错题卡，3 天后自测一遍，直到全部答对。</li>
+    <li><strong>备下周</strong>：第 7 周进入综合提升——把前 6 周的技能串成「一个人能独立完成一单」的完整能力。</li>
+  </ul>
+
+    <div class="section">
+    <h2>🚀 进入第7周：综合提升训练预览</h2>
+        <p>第6周你已经能独立接单。第7周将进入综合提升——把单项技能串成完整作战能力：</p>
+    <table class="rule-table">
+      <thead><tr><th>第7周主题</th><th>学习目标</th></tr></thead>
+      <tbody>
+        <tr><td>高级销售技巧</td><td>掌握组合销售、大单成交与客户心理博弈</td></tr>
+        <tr><td>复杂案例处理</td><td>能应对高难度验光、疑难售后与投诉升级</td></tr>
+        <tr><td>效率与转化提升</td><td>提高单店产能与成交转化率</td></tr>
+        <tr><td>团队协作</td><td>学会交接、复盘、带新人，融入班组</td></tr>
+        <tr><td>阶段目标</td><td>综合能力接近正式员工水平，为结业做准备</td></tr>
+      </tbody>
+    </table>
+    <div class="tip-box"><div class="label">💡 第7周心理准备</div><p>前 6 周你学的是「单点技能」，第 7 周要开始「串珠子」——把接待、议价、专项、售后连成一条顺滑的线。从这里开始，你会越来越像一名真正的眼镜顾问。</p></div>
+  </div>
+
+  <div class="day-part">
+    <div class="day-part-h"><span class="dp-no">②</span>考后巩固与订正</div>
+    <p class="day-part-d">做完周测卷不是结束 —— 当天把错题弄懂、把独立接单记录补齐交给师傅点评。</p>
+  </div>
+
+<!-- LM-START -->
+<div class="lm-block lm-practice">
+  <h3>🔧 动手实践任务（今日必做）</h3>
+    <div class="lm-pr">
+      <div class="lm-pr-t">任务 1：写一份独立接单复盘（约 30 分钟）</div>
+      <div class="lm-pr-d">统计本周独立接待单数、成交情况，挑出 1 个最成功的案例和 1 个最失败的案例，各写「做对了什么 / 如果重来会怎么改」。</div>
+      <div class="lm-pr-o">✅ 完成标准：有具体数字与场景（如「本周独立接待 11 单，成交 6 单」），不是空话。</div>
+    </div>
+    <div class="lm-pr">
+      <div class="lm-pr-t">任务 2：达标检验与师傅复评（约 20 分钟）</div>
+      <div class="lm-pr-d">逐项对照自评表打分，再请师傅复核，找出分歧点并讨论原因。</div>
+      <div class="lm-pr-o">✅ 完成标准：自评与师傅评价差距不超过 1 个等级，明确 2 个补强项。</div>
+    </div>
+</div>
+<div class="lm-block lm-faq">
+  <h3>⚠️ 常见问题与注意事项</h3>
+    <details class="lm-q">
+      <summary>❓ 独立接单没成交，是不是说明我不适合做销售？</summary>
+      <div class="lm-a">第 6 周看的是「流程完成度」而不是「成交率」。规范走完流程、记录清楚原因，就是达标；如果为了成交乱承诺、乱降价，反而是不合格。成交率会随着熟练度自然提升。</div>
+    </details>
+    <details class="lm-q">
+      <summary>❓ 顾客砍价砍得厉害，我到底能不能让价？</summary>
+      <div class="lm-a">价格权限属于门店规则，一般有明确折让范围。你可以在权限内按流程处理，但<strong>绝不能擅自改价、不能以贬低同行或产品的方式促成</strong>；不确定就现场请师傅确认，这既保护顾客也保护你自己。</div>
+    </details>
+    <details class="lm-q">
+      <summary>❓ 儿童和家长一起进店，我该跟谁说话？</summary>
+      <div class="lm-a">决策者是家长，主要沟通对象是家长，但也要照顾孩子的感受（蹲下来、语速放缓、用轻松语气）。向家长讲专业，向孩子讲「戴上会更清楚」，两头都照顾到，家长信任度会明显提高。</div>
+    </details>
+</div>
+
+<!-- LM-END -->
+
+  <div class="day-part">
+    <div class="day-part-h"><span class="dp-no">③</span>四大流程落地衔接</div>
+    <p class="day-part-d">周测不只是打分 —— 它检验的是标准、带教、考核、优化整条链路的效果。</p>
+  </div>
+
+<!-- FLOW-START -->
+<div class="lm-block flow-block">
+  <h3>🔗 四大流程落地衔接 — 本日内容如何进入门店培训体系</h3>
+  <div class="flow-hook">💡 <b>今天你只要记住这一句：</b>今天给自己做个复盘：这周独立接了多少单、成交多少、卡在哪，够不够进入综合提升阶段。</div>
+  <p class="flow-sub">本日内容对应：<strong>独立接单能力评估（第 6 周节点）</strong>　｜　把今天学的，直接接入「标准—带教—考核—优化」闭环。</p>
+  <div class="flow-grid">
+<div class="flow-col flow-std"><div class="flow-h">① 标准 <span class="fh-tag">教什么</span></div><div class="flow-say"><b>一句话：</b>总结独立接单能力达标情况，明确是否具备进入综合提升阶段的资格。</div><div class="flow-do-t">📋 具体怎么做</div><ul class="flow-do"><li>统计独立接单量与质量，评估能力达标情况</li><li>明确进入第 7 周综合提升阶段的能力门槛</li><li>输出独立接单能力评估结论</li></ul><div class="flow-standard"><b>✔ 完成标准：</b>输出能力评估结论，即达标。</div><div class="flow-pit"><b>⚠ 常见坑：</b>最容易「只看成交率」——第 6 周看的是流程完成度，别用成交率单一衡量新人。</div></div>
+<div class="flow-col flow-teach"><div class="flow-h">② 带教 <span class="fh-tag">怎么教</span></div><div class="flow-say"><b>一句话：</b>训练员结合本周案例，逐项点评并给出下一阶段提升重点。</div><div class="flow-do-t">📋 具体怎么做</div><ul class="flow-do"><li>结合本周独立接单案例，逐项点评表现</li><li>针对薄弱环节制定改进清单</li><li>明确能否进入第 7 周综合提升</li></ul><div class="flow-standard"><b>✔ 完成标准：</b>点评完成且改进清单已定，即带教完成。</div><div class="flow-pit"><b>⚠ 常见坑：</b>点评要「对事不对人」——说清哪个动作要改，别打击新人积极性。</div></div>
+<div class="flow-col flow-check"><div class="flow-h">③ 考核 <span class="fh-tag">是否达标</span></div><div class="flow-say"><b>一句话：</b>通过独立接单能力评定判定是否具备进入第 7 周的资格。</div><div class="flow-do-t">📋 具体怎么做</div><ul class="flow-do"><li>独立接单能力评定：流程规范 + 场景应对 + 服务态度</li><li>评定合格方可进入第 7 周</li></ul><div class="flow-standard"><b>✔ 完成标准：</b>评定合格进入第 7 周；未达标者安排专项补强后重评。</div><div class="flow-pit"><b>⚠ 常见坑：</b>评定要「看能力不看关系」——标准守住了，后面才有底气。</div></div>
+<div class="flow-col flow-opt"><div class="flow-h">④ 优化 <span class="fh-tag">持续迭代</span></div><div class="flow-say"><b>一句话：</b>独立接单期共性问题回流，优化独立作战培养标准。</div><div class="flow-do-t">📋 具体怎么做</div><ul class="flow-do"><li>汇总独立接单期新人的共性问题</li><li>回流优化「独立作战培养标准」</li></ul><div class="flow-standard"><b>✔ 完成标准：</b>形成培养标准优化项，即完成优化。</div><div class="flow-pit"><b>⚠ 常见坑：</b>共性问题是「系统性」的——多数人都卡在同一处，多半是标准要改。</div></div>
+  </div>
+  <p class="flow-meta">👤 <b>责任角色：</b>新员工（学习执行）· 训练员（带教施教）· 值班经理（检查考核）· 门店负责人（审批优化）</p>
+</div>
+<!-- FLOW-END -->
+
+  <!-- 第6周完成标记 -->
+  <p style="text-align:center;color:#1a5276;font-weight:600;margin:24px 0 6px">🎉 恭喜完成第6周学习！下周将进入综合提升训练阶段。</p>
+  <p style="text-align:center;color:#aaa;font-size:.85rem;margin-bottom:20px">— 第6周 · 独立接单训练 · 全部完成 —</p>
+
+  <div class="nav-footer">
+    <a class="nav-btn outline" href="Day_41_练习题.html">← Day 41 练习题</a>
+    <a class="nav-btn outline" href="../index.html">🏠 首页</a>
+    <a class="nav-btn" href="Day_42_周测卷.html">第6周周测卷 →</a>
+  </div>
+</div>
+
+<style id="interactive-options-style">
+.options li{cursor:pointer;transition:background 0.2s,border-color 0.2s;}
+.options li:hover{background:#eaf4fc;border-color:#a9cce3;}
+.options li.correct{background:#e8f5e9!important;border-color:#4caf50!important;color:#2e7d32;font-weight:600;}
+.options li.wrong{background:#ffebee!important;border-color:#ef9a9a!important;color:#b71c1c;}
+.options li.highlight{background:#fff9c4!important;border-color:#f9a825!important;}
+.options li.done{cursor:default;}
+.show-answer-btn{display:none!important;}
+</style>
+</body>
+</html>
